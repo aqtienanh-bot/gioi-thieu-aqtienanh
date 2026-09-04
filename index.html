@@ -256,6 +256,7 @@
   footer p{max-width:44rem}
 
   /* Edit affordance */
+  html:not(.edit) .fab,html:not(.edit) .scrim,html:not(.edit) .drawer{display:none!important}
   .fab{
     position:fixed;right:1.15rem;bottom:1.15rem;z-index:50;
     display:inline-flex;align-items:center;gap:.5rem;
@@ -908,6 +909,7 @@ Hai mảng tưởng như khác nhau, nhưng cùng chung một cách làm: khảo
   renderAll();
 
   if(EDIT_MODE){
+    document.documentElement.classList.add("edit");
     fillInputs();
     bindInputs();
     wireDrawer();
