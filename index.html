@@ -1,0 +1,899 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Công ty TNHH MTV AQ Tiến Anh (MSDN 2802854585) — in ấn, quảng cáo, phần mềm kế toán, thiết kế website và tư vấn phong thủy ứng dụng tại Bỉm Sơn, Thanh Hóa. Tư vấn 24/7: 0972.776.588.">
+<meta property="og:title" content="Công ty TNHH MTV AQ Tiến Anh">
+<meta property="og:description" content="Thương mại — dịch vụ — tư vấn phong thủy ứng dụng. Một đầu mối, làm thật, chịu trách nhiệm.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="vi_VN">
+<title>AQ Tiến Anh</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=IBM+Plex+Mono:wght@500&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+  :root{
+    color-scheme: light dark;
+    --bg:#F1EBDF;
+    --surface:#FAF6EE;
+    --ink:#20293F;
+    --ink-soft:#5F5A4B;
+    --line:#D9D0BE;
+    --line-strong:#20293F;
+    --seal:#9E2B24;
+    --seal-deep:#7C1F1A;
+    --brass:#9A7434;
+    --btn-ink:#FFFFFF;
+    --shadow:0 1px 2px rgba(32,29,20,.05), 0 14px 40px -18px rgba(32,29,20,.22);
+    --step--1:.8125rem;
+    --step-0:1.0625rem;
+    --step-1:1.3rem;
+    --step-2:1.72rem;
+    --step-3:2.3rem;
+    --maxw:46rem;
+    --maxw-wide:62rem;
+    --pad:1.4rem;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#15161C;
+      --surface:#1D1F28;
+      --ink:#ECE5D6;
+      --ink-soft:#A29B89;
+      --line:#33353F;
+      --line-strong:#8A8375;
+      --seal:#DB5A4E;
+      --seal-deep:#B8433A;
+      --brass:#C9A05E;
+      --btn-ink:#1B130B;
+      --shadow:0 1px 2px rgba(0,0,0,.35), 0 16px 44px -20px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#15161C; --surface:#1D1F28; --ink:#ECE5D6; --ink-soft:#A29B89;
+    --line:#33353F; --line-strong:#8A8375; --seal:#DB5A4E; --seal-deep:#B8433A;
+    --brass:#C9A05E; --btn-ink:#1B130B;
+    --shadow:0 1px 2px rgba(0,0,0,.35), 0 16px 44px -20px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-size:var(--step-0);
+    line-height:1.68;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:"Newsreader",Georgia,"Times New Roman",serif;font-weight:500;line-height:1.16;text-wrap:balance;margin:0}
+  p{margin:0}
+  a{color:inherit}
+  ::selection{background:var(--seal);color:#fff}
+  a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,textarea:focus-visible{
+    outline:2px solid var(--seal);outline-offset:2px;border-radius:2px
+  }
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad)}
+  .wrap-wide{max-width:var(--maxw-wide);margin:0 auto;padding-inline:var(--pad)}
+  .eyebrow{
+    font-size:var(--step--1);text-transform:uppercase;letter-spacing:.16em;
+    font-weight:600;color:var(--seal);margin:0 0 .9rem
+  }
+  section{border-top:1px solid var(--line);padding-block:clamp(3rem,7vw,5rem)}
+  .lead{color:var(--ink-soft);font-size:var(--step-1);line-height:1.55;max-width:38rem}
+
+  /* Top bar */
+  .topbar{
+    position:sticky;top:0;z-index:40;
+    background:var(--bg);
+    background:color-mix(in srgb,var(--bg) 86%,transparent);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .row{
+    max-width:var(--maxw-wide);margin:0 auto;padding:.7rem var(--pad);
+    display:flex;justify-content:space-between;align-items:baseline;gap:1rem
+  }
+  .brand{font-family:"Newsreader",serif;font-weight:600;font-size:1.05rem;letter-spacing:.02em;text-decoration:none}
+  .topbar nav{display:flex;gap:1.35rem;font-size:var(--step--1)}
+  .topbar nav a{color:var(--ink-soft);text-decoration:none;transition:color .15s}
+  .topbar nav a:hover{color:var(--seal)}
+  @media (max-width:720px){.topbar nav{display:none}}
+
+  /* Top accent */
+  .top-accent{height:3px;background:linear-gradient(90deg,var(--brass),var(--seal) 55%,var(--seal-deep))}
+
+  /* Hero */
+  .hero{position:relative;overflow:clip;border-top:0;isolation:isolate}
+  .hero-bg{
+    position:absolute;inset:0;z-index:-1;overflow:clip;
+    background:
+      radial-gradient(58% 55% at 84% 8%, color-mix(in srgb,var(--brass) 26%,transparent), transparent 70%),
+      radial-gradient(56% 60% at 6% 96%, color-mix(in srgb,var(--seal) 18%,transparent), transparent 72%);
+  }
+  .hero-bg::after{
+    content:"";position:absolute;inset:0;color:var(--ink);opacity:.05;
+    background-image:radial-gradient(currentColor .6px, transparent .7px);
+    background-size:22px 22px;
+    -webkit-mask-image:linear-gradient(180deg,#000,transparent 78%);
+            mask-image:linear-gradient(180deg,#000,transparent 78%);
+  }
+  .motif{position:absolute;pointer-events:none}
+  .motif-seal{color:var(--seal);opacity:.07;width:min(40vw,19rem);right:-3.5rem;top:-2.5rem;animation:spin 150s linear infinite}
+  .motif-bagua{color:var(--brass);opacity:.1;width:min(24vw,11rem);left:-2rem;bottom:1.5rem}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  .hero .wrap{padding-top:clamp(2.4rem,6vw,3.8rem);padding-bottom:clamp(2.6rem,6vw,3.8rem);position:relative;z-index:1}
+  .hero-panel{
+    position:relative;
+    background:var(--surface);
+    background:color-mix(in srgb,var(--surface) 78%, transparent);
+    -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);
+    border:1px solid var(--line);
+    padding:clamp(1.5rem,4vw,2.9rem);
+    box-shadow:var(--shadow);
+  }
+  .hero-panel::before{
+    content:"";position:absolute;inset:7px;pointer-events:none;
+    border:1px solid color-mix(in srgb,var(--brass) 45%,transparent);
+  }
+  .corner{position:absolute;width:15px;height:15px;pointer-events:none}
+  .corner.tl{top:-1px;left:-1px;border-top:2px solid var(--seal);border-left:2px solid var(--seal)}
+  .corner.tr{top:-1px;right:-1px;border-top:2px solid var(--seal);border-right:2px solid var(--seal)}
+  .corner.bl{bottom:-1px;left:-1px;border-bottom:2px solid var(--seal);border-left:2px solid var(--seal)}
+  .corner.br{bottom:-1px;right:-1px;border-bottom:2px solid var(--seal);border-right:2px solid var(--seal)}
+
+  .hero-kicker{font-size:1rem;line-height:1.5;color:var(--seal);font-weight:600;letter-spacing:.01em;margin:0 0 .5rem}
+  .hero h1{
+    font-size:clamp(1.9rem,5vw,2.95rem);
+    font-weight:600;letter-spacing:-.012em;line-height:1.14;margin:.2rem 0 0
+  }
+  .hero .rule{display:block;width:3.5rem;height:3px;background:var(--seal);margin:1.1rem 0 1.2rem}
+  .hero .sub{font-size:var(--step-1);color:var(--ink-soft);line-height:1.55;max-width:39rem}
+  .cta-row{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.6rem}
+
+  .chips{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:1.5rem 0 0;padding:0}
+  .chips li{
+    font-size:.8rem;font-weight:500;padding:.38rem .78rem;border-radius:999px;
+    border:1px solid var(--line);color:var(--ink-soft);background:var(--bg);
+    display:inline-flex;align-items:center;gap:.45rem
+  }
+  .chips li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--seal);flex:none}
+  .chips li:nth-child(n+5)::before{background:var(--brass)}
+
+  .trust{
+    display:flex;flex-wrap:wrap;gap:.55rem 1.3rem;margin-top:1.7rem;
+    padding-top:1.3rem;border-top:1px solid var(--line);
+    font-size:var(--step--1);color:var(--ink-soft)
+  }
+  .trust span{display:inline-flex;align-items:center;gap:.5rem}
+  .trust span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--brass);flex:none}
+
+  .seal{position:absolute;color:var(--seal);pointer-events:none}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:.55rem;padding:.82rem 1.35rem;border-radius:7px;
+    font-family:inherit;font-weight:600;font-size:.98rem;text-decoration:none;cursor:pointer;
+    transition:background .15s,color .15s,border-color .15s;border:1px solid transparent
+  }
+  .btn-primary{background:var(--seal);color:var(--btn-ink);border-color:var(--seal-deep)}
+  .btn-primary:hover{background:var(--seal-deep)}
+  .btn-secondary{background:transparent;color:var(--ink);border-color:var(--line)}
+  .btn-secondary:hover{border-color:var(--seal);color:var(--seal)}
+
+  /* Problem list */
+  .prob-list{list-style:none;margin:2rem 0 0;padding:0;display:grid;gap:0}
+  .prob-list li{
+    padding:1.15rem 0 1.15rem 1.6rem;border-top:1px solid var(--line);position:relative;color:var(--ink-soft)
+  }
+  .prob-list li::before{
+    content:"—";position:absolute;left:0;color:var(--seal);font-weight:600
+  }
+
+  /* Solution grid */
+  .sol-cat{
+    font-family:"Newsreader",Georgia,serif;font-size:var(--step-1);font-weight:600;color:var(--ink);
+    margin:2.6rem 0 0;padding-left:1.05rem;position:relative
+  }
+  .sol-cat::before{content:"";position:absolute;left:0;top:.62em;width:.62rem;height:2px;background:var(--seal)}
+  .sol-grid{display:grid;grid-template-columns:repeat(2,1fr);column-gap:2.6rem;margin-top:.4rem}
+  .sol{padding:1.4rem 0;border-top:1px solid var(--line)}
+  .sol h3{font-size:1.12rem;font-weight:600;margin-bottom:.35rem}
+  .sol p{color:var(--ink-soft);font-size:.97rem}
+  @media (max-width:640px){.sol-grid{grid-template-columns:1fr}}
+
+  /* Proof */
+  .proof-list{list-style:none;margin:2rem 0 0;padding:0;display:grid;gap:0}
+  .proof-list li{
+    padding:1.1rem 0 1.1rem 1.9rem;border-top:1px solid var(--line);position:relative
+  }
+  .proof-list li:last-child{border-bottom:1px solid var(--line)}
+  .proof-list li::before{
+    content:"✓";position:absolute;left:0;top:1.1rem;color:var(--seal);font-weight:700;font-size:.9rem
+  }
+
+  /* About */
+  .about-body{max-width:var(--maxw);margin-top:1.6rem}
+  .about-body p{margin-bottom:1.1rem}
+  .about-body p:last-child{margin-bottom:0}
+
+  /* Legal ledger */
+  .legal{position:relative;overflow:clip}
+  .legal .seal{bottom:-3rem;left:-3.5rem;width:min(50vw,22rem);opacity:.055}
+  .legal .wrap-wide{position:relative;z-index:1}
+  .ledger{border-top:2px solid var(--line-strong);border-bottom:2px solid var(--line-strong);margin-top:1.6rem}
+  .ledger>div{
+    display:grid;grid-template-columns:15rem 1fr;gap:1rem 1.4rem;
+    padding:.78rem 0;border-bottom:1px solid var(--line)
+  }
+  .ledger>div:last-child{border-bottom:0}
+  .ledger dt{
+    margin:0;color:var(--ink-soft);font-size:var(--step--1);
+    text-transform:uppercase;letter-spacing:.08em;font-weight:600;padding-top:.15rem
+  }
+  .ledger dd{margin:0}
+  .ledger dd.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;letter-spacing:.01em}
+  .legal-note{margin-top:1.1rem;font-size:var(--step--1);color:var(--ink-soft);font-style:italic}
+  @media (max-width:620px){.ledger>div{grid-template-columns:1fr;gap:.2rem}}
+
+  /* Final CTA */
+  .finalcta{background:var(--surface)}
+  .finalcta h2{font-size:clamp(1.6rem,4vw,2.35rem);font-weight:600;max-width:30rem}
+  .finalcta .lead{margin-top:1rem}
+  .finalcta .cta-row{margin-top:1.8rem}
+
+  /* Contact */
+  .contact-grid{display:grid;grid-template-columns:15rem 1fr;gap:1rem 1.4rem;margin-top:1.6rem}
+  .contact-grid dt{margin:0;color:var(--ink-soft);font-size:var(--step--1);text-transform:uppercase;letter-spacing:.08em;font-weight:600;padding-top:.15rem}
+  .contact-grid dd{margin:0}
+  .contact-grid dd ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.15rem}
+  .contact-grid a{text-decoration:none;border-bottom:1px solid var(--line)}
+  .contact-grid a:hover{border-color:var(--seal);color:var(--seal)}
+  @media (max-width:620px){.contact-grid{grid-template-columns:1fr;gap:.2rem}}
+
+  footer{border-top:1px solid var(--line);padding-block:2.2rem;color:var(--ink-soft);font-size:var(--step--1)}
+  footer p{max-width:44rem}
+
+  /* Edit affordance */
+  .fab{
+    position:fixed;right:1.15rem;bottom:1.15rem;z-index:50;
+    display:inline-flex;align-items:center;gap:.5rem;
+    padding:.72rem 1.1rem;border-radius:999px;
+    background:var(--seal);color:var(--btn-ink);border:1px solid var(--seal-deep);
+    font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;box-shadow:var(--shadow)
+  }
+  .fab:hover{background:var(--seal-deep)}
+  .scrim{
+    position:fixed;inset:0;background:rgba(10,10,14,.42);opacity:0;pointer-events:none;
+    transition:opacity .25s;z-index:55
+  }
+  .scrim.show{opacity:1;pointer-events:auto}
+  .drawer{
+    position:fixed;top:0;right:0;height:100dvh;width:min(432px,100vw);
+    background:var(--surface);border-left:1px solid var(--line);box-shadow:var(--shadow);
+    transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+    z-index:60;display:flex;flex-direction:column
+  }
+  .drawer.open{transform:none}
+  .drawer header{
+    padding:1rem 1.15rem;border-bottom:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;gap:1rem;flex:none
+  }
+  .drawer header h2{font-family:"Newsreader",serif;font-size:1.15rem;font-weight:600}
+  .drawer .x{background:none;border:1px solid var(--line);border-radius:6px;width:2rem;height:2rem;cursor:pointer;color:var(--ink);font-size:1rem}
+  .drawer .x:hover{border-color:var(--seal);color:var(--seal)}
+  .scrollarea{overflow-y:auto;padding:.6rem 1.15rem 3rem;flex:1}
+  .hint{font-size:.76rem;color:var(--ink-soft);margin:.6rem 0 .2rem;line-height:1.5}
+  details{border-top:1px solid var(--line)}
+  details[open]{padding-bottom:.6rem}
+  summary{cursor:pointer;font-weight:600;font-size:.9rem;padding:.7rem 0;list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"+";color:var(--seal);font-weight:700;margin-right:.5rem}
+  details[open] summary::before{content:"–"}
+  .field{display:flex;flex-direction:column;gap:.3rem;margin:.55rem 0}
+  .field label{font-size:.7rem;text-transform:uppercase;letter-spacing:.09em;font-weight:600;color:var(--ink-soft)}
+  .field input,.field textarea{
+    font-family:inherit;font-size:.88rem;color:var(--ink);background:var(--bg);
+    border:1px solid var(--line);border-radius:6px;padding:.5rem .6rem;line-height:1.5;width:100%
+  }
+  .field textarea{resize:vertical;min-height:4.5rem}
+  .field input:focus,.field textarea:focus{border-color:var(--seal);outline:1px solid var(--seal)}
+  .drawer-actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.2rem 0 .4rem}
+  .drawer-actions button{
+    font-family:inherit;font-size:.78rem;font-weight:600;padding:.5rem .8rem;border-radius:6px;
+    border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer
+  }
+  .drawer-actions button:hover{border-color:var(--seal);color:var(--seal)}
+  #jsonOut{width:100%;min-height:7rem;margin-top:.6rem;font-family:"IBM Plex Mono",monospace;font-size:.72rem;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:.5rem}
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *{transition:none!important}
+    .motif-seal{animation:none!important}
+  }
+  @media print{
+    .topbar,.fab,.scrim,.drawer,.hero-bg,.motif,.legal .seal,.top-accent{display:none!important}
+    body{background:#fff;color:#000}
+    .hero-panel{box-shadow:none;border-color:#ccc}
+    .hero-panel::before,.corner{display:none!important}
+    section,footer{border-color:#ccc}
+    a{border:0!important}
+  }
+</style>
+</head>
+<body>
+
+<div class="top-accent"></div>
+<div class="topbar">
+  <div class="row">
+    <a href="#top" class="brand" data-field="name">AQ Tiến Anh</a>
+    <nav>
+      <a href="#van-de">Vấn đề</a>
+      <a href="#giai-phap">Lĩnh vực</a>
+      <a href="#vi-sao">Vì sao chọn</a>
+      <a href="#ve-cong-ty">Về công ty</a>
+      <a href="#phap-ly">Pháp lý</a>
+      <a href="#lien-he">Liên hệ</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true">
+    <svg class="motif motif-bagua" viewBox="0 0 100 100">
+      <polygon points="30,3 70,3 97,30 97,70 70,97 30,97 3,70 3,30" fill="none" stroke="currentColor" stroke-width="2"/>
+      <polygon points="35,15 65,15 85,35 85,65 65,85 35,85 15,65 15,35" fill="none" stroke="currentColor" stroke-width="1"/>
+      <circle cx="50" cy="50" r="13" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M50 37 a6.5 6.5 0 0 1 0 13 a6.5 6.5 0 0 0 0 13" fill="none" stroke="currentColor" stroke-width="2"/>
+    </svg>
+    <svg class="motif motif-seal" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" stroke-width="2"/>
+      <circle cx="60" cy="60" r="45" fill="none" stroke="currentColor" stroke-width="1"/>
+      <path d="M60 22 l9.3 28.6 30.1 0 -24.4 17.7 9.3 28.6 -24.3-17.7 -24.3 17.7 9.3-28.6 -24.4-17.7 30.1 0 Z" fill="currentColor"/>
+    </svg>
+  </div>
+  <div class="wrap">
+    <div class="hero-panel">
+      <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+      <p class="hero-kicker" data-field="heroKicker">AQ Tiến Anh là doanh nghiệp thương mại &amp; dịch vụ đa lĩnh vực chuyên sâu.</p>
+      <h1 data-field="heroTitle">Từ tấm biển hiệu đến lá số cho con — một nơi lo trọn.</h1>
+      <span class="rule"></span>
+      <p class="sub" data-field="heroSub">In ấn · Quảng cáo · Phần mềm kế toán · Thiết kế website — và tư vấn phong thuỷ nhà ở, mộ phần, lập lá số Bát Tự – Tử Vi, đặt tên cho con theo phong thuỷ. Nhiều lĩnh vực, mỗi lĩnh vực làm đến nơi đến chốn.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#lien-he" data-field="heroCtaPrimary">Nhận tư vấn miễn phí</a>
+        <a class="btn btn-secondary" href="#giai-phap" data-field="heroCtaSecondary">Xem tám lĩnh vực</a>
+      </div>
+      <ul class="chips" aria-label="Các lĩnh vực">
+        <li>In ấn</li>
+        <li>Quảng cáo</li>
+        <li>Phần mềm kế toán</li>
+        <li>Thiết kế website</li>
+        <li>Phong thuỷ nhà ở</li>
+        <li>Phong thuỷ mộ phần</li>
+        <li>Bát Tự &amp; Tử Vi</li>
+        <li>Đặt tên cho con</li>
+      </ul>
+      <div class="trust">
+        <span data-field="trust1">Thành lập ngày 24/06/2020</span>
+        <span data-field="trust2">Mã số doanh nghiệp 2802854585</span>
+        <span data-field="trust3">Trụ sở tại Phường Quang Trung, Thanh Hoá</span>
+        <span data-field="trust4">Tám nhóm dịch vụ · một đầu mối chịu trách nhiệm</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="van-de">
+  <div class="wrap">
+    <p class="eyebrow" data-field="problemEyebrow">Vấn đề</p>
+    <h2 class="finalcta-h" data-field="problemHeading" style="font-size:clamp(1.5rem,3.6vw,2rem);font-weight:600">Mỗi việc một nơi, mỗi nơi một kiểu — và không ai theo bạn đến cùng.</h2>
+    <p class="lead" data-field="problemLead" style="margin-top:1rem">Doanh nghiệp cần in ấn, biển quảng cáo, phần mềm, website. Gia đình cần xem hướng nhà, chọn ngày, lập lá số, đặt tên cho con. Thường thì mỗi việc lại phải tìm một người khác nhau.</p>
+    <ul class="prob-list">
+      <li data-field="prob1">In ấn – quảng cáo mỗi lần đặt một nơi: mẫu mã, màu sắc và chất lượng không đồng nhất, lại hay trễ hẹn.</li>
+      <li data-field="prob2">Phần mềm kế toán hay website mua xong bị bỏ mặc — không ai hướng dẫn, không ai sửa khi phát sinh lỗi.</li>
+      <li data-field="prob3">Tư vấn phong thuỷ nhà ở, mộ phần mỗi người nói một kiểu; nghe xong càng phân vân, không biết tin ai.</li>
+      <li data-field="prob4">Lập lá số, đặt tên cho con làm vội qua mạng, nhận về vài dòng, không ai giải thích cặn kẽ.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="giai-phap">
+  <div class="wrap">
+    <p class="eyebrow" data-field="solEyebrow">Lĩnh vực hoạt động</p>
+    <h2 data-field="solHeading" style="font-size:clamp(1.6rem,3.8vw,2.2rem);font-weight:600">Tám nhóm dịch vụ, hai thế mạnh — một đầu mối.</h2>
+    <p class="lead" data-field="solLead" style="margin-top:1rem">AQ Tiến Anh làm song song hai mảng: dịch vụ phục vụ công việc kinh doanh, và phong thuỷ ứng dụng phục vụ việc hệ trọng của gia đình. Cùng một cách làm: khảo kỹ, tư vấn thật, bàn giao rõ ràng.</p>
+
+    <h3 class="sol-cat" data-field="solCatA">Dịch vụ cho doanh nghiệp &amp; cửa hàng</h3>
+    <div class="sol-grid">
+      <div class="sol">
+        <h3 data-field="sol1t">In ấn</h3>
+        <p data-field="sol1d">Tờ rơi, hồ sơ, catalogue, kẹp file, tem nhãn, decal, ảnh. In nhanh, màu chuẩn, chất lượng ổn định giữa các lần đặt.</p>
+      </div>
+      <div class="sol">
+        <h3 data-field="sol2t">Quảng cáo</h3>
+        <p data-field="sol2d">Biển hiệu, hộp đèn, standee, banner, backdrop và bộ nhận diện. Thiết kế và thi công trọn gói, bảo hành rõ ràng.</p>
+      </div>
+      <div class="sol">
+        <h3 data-field="sol3t">Phần mềm kế toán AQ Tiến Anh</h3>
+        <p data-field="sol3d">Lập chứng từ, ghi sổ, in ấn theo chuẩn; chạy ngoại tuyến, khoá bản quyền theo tên đơn vị. Bàn giao kèm hướng dẫn và hỗ trợ về sau.</p>
+      </div>
+      <div class="sol">
+        <h3 data-field="sol4t">Thiết kế website</h3>
+        <p data-field="sol4d">Trang giới thiệu công ty, trang bán hàng, landing page. Bàn giao kèm bảng tự chỉnh sửa nội dung — bạn tự cập nhật, không phụ thuộc.</p>
+      </div>
+    </div>
+
+    <h3 class="sol-cat" data-field="solCatB">Phong thuỷ ứng dụng cho gia đình</h3>
+    <div class="sol-grid">
+      <div class="sol">
+        <h3 data-field="sol5t">Phong thuỷ nhà ở</h3>
+        <p data-field="sol5d">Xem hướng, bố cục công năng, ngày giờ động thổ – nhập trạch. Khảo sát thực địa hoặc theo bản vẽ, tư vấn phương án khả thi.</p>
+      </div>
+      <div class="sol">
+        <h3 data-field="sol6t">Phong thuỷ mộ phần</h3>
+        <p data-field="sol6d">Chọn đất, chọn hướng, chọn ngày giờ an táng – cải táng. Tư vấn trên tinh thần trọng lễ nghi và tâm nguyện gia đình.</p>
+      </div>
+      <div class="sol">
+        <h3 data-field="sol7t">Lá số Bát Tự &amp; Tử Vi</h3>
+        <p data-field="sol7d">Luận giải vận mệnh, điểm mạnh – điểm cần lưu ý, các năm quan trọng. Giải thích cặn kẽ, giao bản luận viết tay hoặc đánh máy.</p>
+      </div>
+      <div class="sol">
+        <h3 data-field="sol8t">Đặt tên cho con theo phong thuỷ</h3>
+        <p data-field="sol8d">Cân bằng Bát Tự của bé, hài hoà với mệnh cha mẹ, đẹp về ý nghĩa và dễ gọi. Đề xuất nhiều phương án kèm phân tích.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="vi-sao">
+  <div class="wrap">
+    <p class="eyebrow" data-field="proofEyebrow">Vì sao chọn AQ Tiến Anh</p>
+    <h2 data-field="proofHeading" style="font-size:clamp(1.6rem,3.8vw,2.2rem);font-weight:600">Một pháp nhân rõ ràng đứng sau mỗi bản in và mỗi buổi luận giải.</h2>
+    <p class="lead" data-field="proofLead" style="margin-top:1rem">Không phải một cửa hàng không tên, cũng không phải một thầy ẩn danh trên mạng. Mọi việc đều gắn với hồ sơ pháp lý công khai dưới đây.</p>
+    <ul class="proof-list">
+      <li data-field="proof1">Pháp nhân minh bạch: Mã số doanh nghiệp 2802854585, cấp ngày 24/06/2020 bởi Phòng Đăng ký kinh doanh — Sở Kế hoạch và Đầu tư tỉnh Thanh Hoá.</li>
+      <li data-field="proof2">Một chủ sở hữu: ThS. Nguyễn Vinh Quang — Giám đốc, người đại diện theo pháp luật, trực tiếp làm việc và chịu trách nhiệm với khách hàng.</li>
+      <li data-field="proof3">Doanh nghiệp có hợp đồng, báo giá và chứng từ đầy đủ; phần tư vấn phong thuỷ giao kèm bản luận giải bằng văn bản để gia đình lưu lại.</li>
+      <li data-field="proof4">Gắn bó với địa phương: khách hàng có thể đến làm việc trực tiếp tại trụ sở 131 Lý Thái Tổ, TDP 12, Phường Quang Trung, Tỉnh Thanh Hoá.</li>
+      <li data-field="proof5">Tư vấn phong thuỷ trên tinh thần tôn trọng tín ngưỡng và quan sát thực tế — nói rõ điều làm được và không làm được, không hù doạ, không ép mua vật phẩm.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="ve-cong-ty">
+  <div class="wrap">
+    <p class="eyebrow" data-field="aboutEyebrow">Về công ty</p>
+    <h2 data-field="aboutHeading" style="font-size:clamp(1.6rem,3.8vw,2.2rem);font-weight:600">Một doanh nghiệp nhỏ, làm đúng phần việc của mình.</h2>
+    <div class="about-body" data-field="about">Công ty TNHH Một thành viên AQ Tiến Anh được thành lập ngày 24 tháng 6 năm 2020 tại tỉnh Thanh Hoá, hoạt động trong lĩnh vực thương mại và dịch vụ đa lĩnh vực. Là doanh nghiệp một chủ sở hữu, mọi cam kết của công ty gắn liền trực tiếp với uy tín cá nhân của người sáng lập.
+
+AQ Tiến Anh làm song song hai mảng công việc. Một bên là dịch vụ phục vụ kinh doanh: in ấn, quảng cáo – biển hiệu, phần mềm kế toán và thiết kế website. Một bên là phong thuỷ ứng dụng phục vụ việc hệ trọng của gia đình: tư vấn nhà ở và mộ phần, lập lá số Bát Tự – Tử Vi, đặt tên cho con.
+
+Hai mảng tưởng như khác nhau, nhưng cùng chung một cách làm: khảo kỹ, tư vấn thật, bàn giao rõ ràng và đồng hành sau đó. Chúng tôi tin một đơn vị nhỏ phục vụ tốt nhất khi làm đúng phần việc của mình, giữ lời và minh bạch trong từng giao dịch — nguyên tắc AQ Tiến Anh theo đuổi từ ngày đầu.</div>
+  </div>
+</section>
+
+<section id="phap-ly" class="legal">
+  <svg class="seal" viewBox="0 0 120 120" aria-hidden="true">
+    <circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" stroke-width="2"/>
+    <circle cx="60" cy="60" r="45" fill="none" stroke="currentColor" stroke-width="1"/>
+    <path d="M60 22 l9.3 28.6 30.1 0 -24.4 17.7 9.3 28.6 -24.3-17.7 -24.3 17.7 9.3-28.6 -24.4-17.7 30.1 0 Z" fill="currentColor"/>
+  </svg>
+  <div class="wrap-wide">
+    <p class="eyebrow" data-field="legalEyebrow">Thông tin pháp lý</p>
+    <h2 data-field="legalHeading" style="font-size:clamp(1.6rem,3.8vw,2.2rem);font-weight:600">Trích Giấy chứng nhận đăng ký doanh nghiệp</h2>
+    <dl class="ledger">
+      <div><dt>Tên đầy đủ</dt><dd data-field="fullname">CÔNG TY TNHH MỘT THÀNH VIÊN AQ TIẾN ANH</dd></div>
+      <div><dt>Tên giao dịch</dt><dd data-field="tradename">AQ TIẾN ANH</dd></div>
+      <div><dt>Mã số doanh nghiệp</dt><dd class="mono" data-field="msdn">2802854585</dd></div>
+      <div><dt>Ngày đăng ký lần đầu</dt><dd class="mono" data-field="regdate">24/06/2020</dd></div>
+      <div><dt>Cơ quan cấp</dt><dd data-field="regoffice">Phòng Đăng ký kinh doanh — Sở Kế hoạch và Đầu tư tỉnh Thanh Hoá</dd></div>
+      <div><dt>Loại hình</dt><dd data-field="legaltype">Công ty TNHH một thành viên</dd></div>
+      <div><dt>Trụ sở chính</dt><dd data-field="hq">131 Lý Thái Tổ, TDP 12, Phường Quang Trung, Tỉnh Thanh Hoá</dd></div>
+      <div><dt>Người đại diện theo pháp luật</dt><dd data-field="rep">ThS. Nguyễn Vinh Quang — Giám đốc</dd></div>
+      <div><dt>Tài khoản ngân hàng</dt><dd class="mono" data-field="bank">16171888888 — Ngân hàng TMCP Á Châu (ACB), Chi nhánh Bỉm Sơn</dd></div>
+    </dl>
+    <p class="legal-note" data-field="legalNote">Thông tin nêu trên trích từ Giấy chứng nhận đăng ký doanh nghiệp. Mọi hợp đồng, hoá đơn và cam kết bảo hành đều được lập bằng văn bản theo pháp nhân này.</p>
+  </div>
+</section>
+
+<section id="lien-he" class="finalcta">
+  <div class="wrap">
+    <p class="eyebrow" data-field="ctaEyebrow">Bắt đầu hôm nay</p>
+    <h2 data-field="ctaHeading">Bạn cần một bộ biển hiệu, một website, hay một buổi luận giải lá số?</h2>
+    <p class="lead" data-field="ctaLead">Bắt đầu bằng một cuộc trò chuyện: tư vấn miễn phí, báo giá rõ ràng, không ràng buộc. Gọi hoặc nhắn — chúng tôi sẽ tư vấn đúng việc bạn cần, kể cả khi đó chưa phải lúc.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" id="ctaCall" href="tel:0972776588" data-field="ctaBtn1">Gọi hoặc Zalo: 0972.776.588</a>
+      <a class="btn btn-secondary" id="ctaMail" href="mailto:aqtienanh@gmail.com" data-field="ctaBtn2">Gửi email hoặc nhắn Zalo cho chúng tôi</a>
+    </div>
+    <dl class="contact-grid">
+      <dt data-field="contactLabelAddr">Địa chỉ</dt><dd data-field="cAddress">131 Lý Thái Tổ, TDP 12, Phường Quang Trung, Tỉnh Thanh Hoá</dd>
+      <dt data-field="contactLabelPhone">Gọi / Zalo</dt><dd><ul data-field="cPhones"></ul></dd>
+      <dt data-field="contactLabelZalo">Nhắn Zalo</dt><dd data-field="cZalo"></dd>
+      <dt data-field="contactLabelEmail">Email</dt><dd data-field="cEmail"></dd>
+      <dt data-field="contactLabelHours">Tiếp nhận yêu cầu</dt><dd data-field="cHours">24/7 tất cả các ngày trong tuần — để lại thông tin, chúng tôi sẽ liên hệ tư vấn.</dd>
+    </dl>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap-wide">
+    <p data-field="footerNote">© 2020–2026 Công ty TNHH Một thành viên AQ Tiến Anh. Mã số doanh nghiệp 2802854585 do Phòng Đăng ký kinh doanh — Sở Kế hoạch và Đầu tư tỉnh Thanh Hoá cấp. Trang thông tin doanh nghiệp.</p>
+  </div>
+</footer>
+
+<button class="fab" id="fab" aria-haspopup="dialog" aria-expanded="false" aria-controls="drawer">✎ Chỉnh sửa nội dung</button>
+<div class="scrim" id="scrim"></div>
+
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Chỉnh sửa nội dung trang">
+  <header>
+    <h2>Chỉnh sửa nội dung</h2>
+    <button class="x" id="closeDrawer" aria-label="Đóng">✕</button>
+  </header>
+  <div class="scrollarea">
+    <p class="hint">Sửa trực tiếp các ô bên dưới — trang sẽ cập nhật ngay. Nội dung được lưu trên trình duyệt này. Dùng “Sao chép JSON” để lưu bản nội dung, hoặc “In trang” để xuất PDF gửi lập trình viên.</p>
+
+    <details open>
+      <summary>Hero (màn hình đầu)</summary>
+      <div class="field"><label>Dòng nhãn phía trên</label><input data-bind="heroKicker"></div>
+      <div class="field"><label>Tiêu đề chính</label><textarea data-bind="heroTitle"></textarea></div>
+      <div class="field"><label>Tiêu đề phụ</label><textarea data-bind="heroSub"></textarea></div>
+      <div class="field"><label>Nút chính (CTA)</label><input data-bind="heroCtaPrimary"></div>
+      <div class="field"><label>Nút phụ</label><input data-bind="heroCtaSecondary"></div>
+      <div class="field"><label>Điểm tin cậy 1</label><input data-bind="trust1"></div>
+      <div class="field"><label>Điểm tin cậy 2</label><input data-bind="trust2"></div>
+      <div class="field"><label>Điểm tin cậy 3</label><input data-bind="trust3"></div>
+      <div class="field"><label>Điểm tin cậy 4</label><input data-bind="trust4"></div>
+    </details>
+
+    <details>
+      <summary>Phần “Vấn đề”</summary>
+      <div class="field"><label>Nhãn</label><input data-bind="problemEyebrow"></div>
+      <div class="field"><label>Tiêu đề</label><textarea data-bind="problemHeading"></textarea></div>
+      <div class="field"><label>Đoạn dẫn</label><textarea data-bind="problemLead"></textarea></div>
+      <div class="field"><label>Gạch đầu dòng 1</label><textarea data-bind="prob1"></textarea></div>
+      <div class="field"><label>Gạch đầu dòng 2</label><textarea data-bind="prob2"></textarea></div>
+      <div class="field"><label>Gạch đầu dòng 3</label><textarea data-bind="prob3"></textarea></div>
+      <div class="field"><label>Gạch đầu dòng 4</label><textarea data-bind="prob4"></textarea></div>
+    </details>
+
+    <details>
+      <summary>Phần “Lĩnh vực hoạt động”</summary>
+      <div class="field"><label>Nhãn</label><input data-bind="solEyebrow"></div>
+      <div class="field"><label>Tiêu đề</label><textarea data-bind="solHeading"></textarea></div>
+      <div class="field"><label>Đoạn dẫn</label><textarea data-bind="solLead"></textarea></div>
+      <div class="field"><label>Tên nhóm A</label><input data-bind="solCatA"></div>
+      <div class="field"><label>A · Dịch vụ 1 — tên</label><input data-bind="sol1t"></div>
+      <div class="field"><label>A · Dịch vụ 1 — mô tả</label><textarea data-bind="sol1d"></textarea></div>
+      <div class="field"><label>A · Dịch vụ 2 — tên</label><input data-bind="sol2t"></div>
+      <div class="field"><label>A · Dịch vụ 2 — mô tả</label><textarea data-bind="sol2d"></textarea></div>
+      <div class="field"><label>A · Dịch vụ 3 — tên</label><input data-bind="sol3t"></div>
+      <div class="field"><label>A · Dịch vụ 3 — mô tả</label><textarea data-bind="sol3d"></textarea></div>
+      <div class="field"><label>A · Dịch vụ 4 — tên</label><input data-bind="sol4t"></div>
+      <div class="field"><label>A · Dịch vụ 4 — mô tả</label><textarea data-bind="sol4d"></textarea></div>
+      <div class="field"><label>Tên nhóm B</label><input data-bind="solCatB"></div>
+      <div class="field"><label>B · Dịch vụ 5 — tên</label><input data-bind="sol5t"></div>
+      <div class="field"><label>B · Dịch vụ 5 — mô tả</label><textarea data-bind="sol5d"></textarea></div>
+      <div class="field"><label>B · Dịch vụ 6 — tên</label><input data-bind="sol6t"></div>
+      <div class="field"><label>B · Dịch vụ 6 — mô tả</label><textarea data-bind="sol6d"></textarea></div>
+      <div class="field"><label>B · Dịch vụ 7 — tên</label><input data-bind="sol7t"></div>
+      <div class="field"><label>B · Dịch vụ 7 — mô tả</label><textarea data-bind="sol7d"></textarea></div>
+      <div class="field"><label>B · Dịch vụ 8 — tên</label><input data-bind="sol8t"></div>
+      <div class="field"><label>B · Dịch vụ 8 — mô tả</label><textarea data-bind="sol8d"></textarea></div>
+    </details>
+
+    <details>
+      <summary>Phần “Vì sao chọn”</summary>
+      <div class="field"><label>Nhãn</label><input data-bind="proofEyebrow"></div>
+      <div class="field"><label>Tiêu đề</label><textarea data-bind="proofHeading"></textarea></div>
+      <div class="field"><label>Đoạn dẫn</label><textarea data-bind="proofLead"></textarea></div>
+      <div class="field"><label>Bằng chứng 1</label><textarea data-bind="proof1"></textarea></div>
+      <div class="field"><label>Bằng chứng 2</label><textarea data-bind="proof2"></textarea></div>
+      <div class="field"><label>Bằng chứng 3</label><textarea data-bind="proof3"></textarea></div>
+      <div class="field"><label>Bằng chứng 4</label><textarea data-bind="proof4"></textarea></div>
+      <div class="field"><label>Bằng chứng 5</label><textarea data-bind="proof5"></textarea></div>
+    </details>
+
+    <details>
+      <summary>Phần “Về công ty”</summary>
+      <div class="field"><label>Nhãn</label><input data-bind="aboutEyebrow"></div>
+      <div class="field"><label>Tiêu đề</label><textarea data-bind="aboutHeading"></textarea></div>
+      <div class="field"><label>Nội dung (cách đoạn bằng dòng trống)</label><textarea data-bind="about" style="min-height:11rem"></textarea></div>
+    </details>
+
+    <details>
+      <summary>Thông tin pháp lý</summary>
+      <div class="field"><label>Nhãn</label><input data-bind="legalEyebrow"></div>
+      <div class="field"><label>Tiêu đề</label><input data-bind="legalHeading"></div>
+      <div class="field"><label>Tên đầy đủ</label><input data-bind="fullname"></div>
+      <div class="field"><label>Tên giao dịch</label><input data-bind="tradename"></div>
+      <div class="field"><label>Mã số doanh nghiệp</label><input data-bind="msdn"></div>
+      <div class="field"><label>Ngày đăng ký lần đầu</label><input data-bind="regdate"></div>
+      <div class="field"><label>Cơ quan cấp</label><textarea data-bind="regoffice"></textarea></div>
+      <div class="field"><label>Loại hình</label><input data-bind="legaltype"></div>
+      <div class="field"><label>Trụ sở chính</label><textarea data-bind="hq"></textarea></div>
+      <div class="field"><label>Người đại diện theo pháp luật</label><input data-bind="rep"></div>
+      <div class="field"><label>Tài khoản ngân hàng</label><textarea data-bind="bank"></textarea></div>
+      <div class="field"><label>Ghi chú</label><textarea data-bind="legalNote"></textarea></div>
+    </details>
+
+    <details>
+      <summary>CTA cuối trang &amp; Liên hệ</summary>
+      <div class="field"><label>Nhãn</label><input data-bind="ctaEyebrow"></div>
+      <div class="field"><label>Tiêu đề</label><textarea data-bind="ctaHeading"></textarea></div>
+      <div class="field"><label>Đoạn dẫn</label><textarea data-bind="ctaLead"></textarea></div>
+      <div class="field"><label>Nút 1 — chữ hiển thị</label><input data-bind="ctaBtn1"></div>
+      <div class="field"><label>Nút 1 — số gọi (chỉ chữ số)</label><input data-bind="ctaPhone"></div>
+      <div class="field"><label>Nút 2 — chữ hiển thị</label><input data-bind="ctaBtn2"></div>
+      <div class="field"><label>Địa chỉ</label><textarea data-bind="cAddress"></textarea></div>
+      <div class="field"><label>Số gọi / Zalo (mỗi số một dòng)</label><textarea data-bind="cPhones"></textarea></div>
+      <div class="field"><label>Số Zalo (nút mở chat)</label><input data-bind="cZalo"></div>
+      <div class="field"><label>Email</label><input data-bind="cEmail"></div>
+      <div class="field"><label>Tiếp nhận yêu cầu</label><input data-bind="cHours"></div>
+    </details>
+
+    <details>
+      <summary>Chân trang</summary>
+      <div class="field"><label>Dòng chân trang</label><textarea data-bind="footerNote"></textarea></div>
+      <div class="field"><label>Tên hiển thị (thanh trên cùng)</label><input data-bind="name"></div>
+    </details>
+
+    <div class="drawer-actions">
+      <button id="resetBtn" type="button">Khôi phục mặc định</button>
+      <button id="copyBtn" type="button">Sao chép JSON</button>
+      <button id="printBtn" type="button">In trang</button>
+    </div>
+    <textarea id="jsonOut" hidden readonly></textarea>
+  </div>
+</aside>
+
+<script>
+(function(){
+  "use strict";
+  var LS = "aqta.content.v8";
+  var DEFAULTS = {
+    name:"AQ Tiến Anh",
+    heroKicker:"AQ Tiến Anh là doanh nghiệp thương mại & dịch vụ đa lĩnh vực chuyên sâu.",
+    heroTitle:"Từ tấm biển hiệu đến lá số cho con — một nơi lo trọn.",
+    heroSub:"In ấn · Quảng cáo · Phần mềm kế toán · Thiết kế website — và tư vấn phong thuỷ nhà ở, mộ phần, lập lá số Bát Tự – Tử Vi, đặt tên cho con theo phong thuỷ. Nhiều lĩnh vực, mỗi lĩnh vực làm đến nơi đến chốn.",
+    heroCtaPrimary:"Nhận tư vấn miễn phí",
+    heroCtaSecondary:"Xem tám lĩnh vực",
+    trust1:"Thành lập ngày 24/06/2020",
+    trust2:"Mã số doanh nghiệp 2802854585",
+    trust3:"Trụ sở tại Phường Quang Trung, Thanh Hoá",
+    trust4:"Tám nhóm dịch vụ · một đầu mối chịu trách nhiệm",
+
+    problemEyebrow:"Vấn đề",
+    problemHeading:"Mỗi việc một nơi, mỗi nơi một kiểu — và không ai theo bạn đến cùng.",
+    problemLead:"Doanh nghiệp cần in ấn, biển quảng cáo, phần mềm, website. Gia đình cần xem hướng nhà, chọn ngày, lập lá số, đặt tên cho con. Thường thì mỗi việc lại phải tìm một người khác nhau.",
+    prob1:"In ấn – quảng cáo mỗi lần đặt một nơi: mẫu mã, màu sắc và chất lượng không đồng nhất, lại hay trễ hẹn.",
+    prob2:"Phần mềm kế toán hay website mua xong bị bỏ mặc — không ai hướng dẫn, không ai sửa khi phát sinh lỗi.",
+    prob3:"Tư vấn phong thuỷ nhà ở, mộ phần mỗi người nói một kiểu; nghe xong càng phân vân, không biết tin ai.",
+    prob4:"Lập lá số, đặt tên cho con làm vội qua mạng, nhận về vài dòng, không ai giải thích cặn kẽ.",
+
+    solEyebrow:"Lĩnh vực hoạt động",
+    solHeading:"Tám nhóm dịch vụ, hai thế mạnh — một đầu mối.",
+    solLead:"AQ Tiến Anh làm song song hai mảng: dịch vụ phục vụ công việc kinh doanh, và phong thuỷ ứng dụng phục vụ việc hệ trọng của gia đình. Cùng một cách làm: khảo kỹ, tư vấn thật, bàn giao rõ ràng.",
+    solCatA:"Dịch vụ cho doanh nghiệp & cửa hàng",
+    solCatB:"Phong thuỷ ứng dụng cho gia đình",
+    sol1t:"In ấn",
+    sol1d:"Tờ rơi, hồ sơ, catalogue, kẹp file, tem nhãn, decal, ảnh. In nhanh, màu chuẩn, chất lượng ổn định giữa các lần đặt.",
+    sol2t:"Quảng cáo",
+    sol2d:"Biển hiệu, hộp đèn, standee, banner, backdrop và bộ nhận diện. Thiết kế và thi công trọn gói, bảo hành rõ ràng.",
+    sol3t:"Phần mềm kế toán AQ Tiến Anh",
+    sol3d:"Lập chứng từ, ghi sổ, in ấn theo chuẩn; chạy ngoại tuyến, khoá bản quyền theo tên đơn vị. Bàn giao kèm hướng dẫn và hỗ trợ về sau.",
+    sol4t:"Thiết kế website",
+    sol4d:"Trang giới thiệu công ty, trang bán hàng, landing page. Bàn giao kèm bảng tự chỉnh sửa nội dung — bạn tự cập nhật, không phụ thuộc.",
+    sol5t:"Phong thuỷ nhà ở",
+    sol5d:"Xem hướng, bố cục công năng, ngày giờ động thổ – nhập trạch. Khảo sát thực địa hoặc theo bản vẽ, tư vấn phương án khả thi.",
+    sol6t:"Phong thuỷ mộ phần",
+    sol6d:"Chọn đất, chọn hướng, chọn ngày giờ an táng – cải táng. Tư vấn trên tinh thần trọng lễ nghi và tâm nguyện gia đình.",
+    sol7t:"Lá số Bát Tự & Tử Vi",
+    sol7d:"Luận giải vận mệnh, điểm mạnh – điểm cần lưu ý, các năm quan trọng. Giải thích cặn kẽ, giao bản luận viết tay hoặc đánh máy.",
+    sol8t:"Đặt tên cho con theo phong thuỷ",
+    sol8d:"Cân bằng Bát Tự của bé, hài hoà với mệnh cha mẹ, đẹp về ý nghĩa và dễ gọi. Đề xuất nhiều phương án kèm phân tích.",
+
+    proofEyebrow:"Vì sao chọn AQ Tiến Anh",
+    proofHeading:"Một pháp nhân rõ ràng đứng sau mỗi bản in và mỗi buổi luận giải.",
+    proofLead:"Không phải một cửa hàng không tên, cũng không phải một thầy ẩn danh trên mạng. Mọi việc đều gắn với hồ sơ pháp lý công khai dưới đây.",
+    proof1:"Pháp nhân minh bạch: Mã số doanh nghiệp 2802854585, cấp ngày 24/06/2020 bởi Phòng Đăng ký kinh doanh — Sở Kế hoạch và Đầu tư tỉnh Thanh Hoá.",
+    proof2:"Một chủ sở hữu: ThS. Nguyễn Vinh Quang — Giám đốc, người đại diện theo pháp luật, trực tiếp làm việc và chịu trách nhiệm với khách hàng.",
+    proof3:"Doanh nghiệp có hợp đồng, báo giá và chứng từ đầy đủ; phần tư vấn phong thuỷ giao kèm bản luận giải bằng văn bản để gia đình lưu lại.",
+    proof4:"Gắn bó với địa phương: khách hàng có thể đến làm việc trực tiếp tại trụ sở 131 Lý Thái Tổ, TDP 12, Phường Quang Trung, Tỉnh Thanh Hoá.",
+    proof5:"Tư vấn phong thuỷ trên tinh thần tôn trọng tín ngưỡng và quan sát thực tế — nói rõ điều làm được và không làm được, không hù doạ, không ép mua vật phẩm.",
+
+    aboutEyebrow:"Về công ty",
+    aboutHeading:"Một doanh nghiệp nhỏ, làm đúng phần việc của mình.",
+    about:"Công ty TNHH Một thành viên AQ Tiến Anh được thành lập ngày 24 tháng 6 năm 2020 tại tỉnh Thanh Hoá, hoạt động trong lĩnh vực thương mại và dịch vụ đa lĩnh vực. Là doanh nghiệp một chủ sở hữu, mọi cam kết của công ty gắn liền trực tiếp với uy tín cá nhân của người sáng lập.\n\nAQ Tiến Anh làm song song hai mảng công việc. Một bên là dịch vụ phục vụ kinh doanh: in ấn, quảng cáo – biển hiệu, phần mềm kế toán và thiết kế website. Một bên là phong thuỷ ứng dụng phục vụ việc hệ trọng của gia đình: tư vấn nhà ở và mộ phần, lập lá số Bát Tự – Tử Vi, đặt tên cho con.\n\nHai mảng tưởng như khác nhau, nhưng cùng chung một cách làm: khảo kỹ, tư vấn thật, bàn giao rõ ràng và đồng hành sau đó. Chúng tôi tin một đơn vị nhỏ phục vụ tốt nhất khi làm đúng phần việc của mình, giữ lời và minh bạch trong từng giao dịch — nguyên tắc AQ Tiến Anh theo đuổi từ ngày đầu.",
+
+    legalEyebrow:"Thông tin pháp lý",
+    legalHeading:"Trích Giấy chứng nhận đăng ký doanh nghiệp",
+    fullname:"CÔNG TY TNHH MỘT THÀNH VIÊN AQ TIẾN ANH",
+    tradename:"AQ TIẾN ANH",
+    msdn:"2802854585",
+    regdate:"24/06/2020",
+    regoffice:"Phòng Đăng ký kinh doanh — Sở Kế hoạch và Đầu tư tỉnh Thanh Hoá",
+    legaltype:"Công ty TNHH một thành viên",
+    hq:"131 Lý Thái Tổ, TDP 12, Phường Quang Trung, Tỉnh Thanh Hoá",
+    rep:"ThS. Nguyễn Vinh Quang — Giám đốc",
+    bank:"16171888888 — Ngân hàng TMCP Á Châu (ACB), Chi nhánh Bỉm Sơn",
+    legalNote:"Thông tin nêu trên trích từ Giấy chứng nhận đăng ký doanh nghiệp. Mọi hợp đồng, hoá đơn và cam kết bảo hành đều được lập bằng văn bản theo pháp nhân này.",
+
+    ctaEyebrow:"Bắt đầu hôm nay",
+    ctaHeading:"Bạn cần một bộ biển hiệu, một website, hay một buổi luận giải lá số?",
+    ctaLead:"Bắt đầu bằng một cuộc trò chuyện: tư vấn miễn phí, báo giá rõ ràng, không ràng buộc. Gọi hoặc nhắn — chúng tôi sẽ tư vấn đúng việc bạn cần, kể cả khi đó chưa phải lúc.",
+    ctaBtn1:"Gọi hoặc Zalo: 0972.776.588",
+    ctaPhone:"0972776588",
+    ctaBtn2:"Gửi email hoặc nhắn Zalo cho chúng tôi",
+
+    contactLabelAddr:"Địa chỉ",
+    contactLabelPhone:"Gọi / Zalo",
+    contactLabelZalo:"Nhắn Zalo",
+    contactLabelEmail:"Email",
+    contactLabelHours:"Tiếp nhận yêu cầu",
+    cAddress:"131 Lý Thái Tổ, TDP 12, Phường Quang Trung, Tỉnh Thanh Hoá",
+    cPhones:"0972.776.588\n0912.399.118",
+    cZalo:"0972.776.588",
+    cEmail:"aqtienanh@gmail.com",
+    cHours:"24/7 tất cả các ngày trong tuần — để lại thông tin, chúng tôi sẽ liên hệ tư vấn.",
+
+    footerNote:"© 2020–2026 Công ty TNHH Một thành viên AQ Tiến Anh. Mã số doanh nghiệp 2802854585 do Phòng Đăng ký kinh doanh — Sở Kế hoạch và Đầu tư tỉnh Thanh Hoá cấp. Trang thông tin doanh nghiệp."
+  };
+
+  var content;
+
+  function load(){
+    content = JSON.parse(JSON.stringify(DEFAULTS));
+    try{
+      var s = localStorage.getItem(LS);
+      if(s){ var o = JSON.parse(s); for(var k in o){ if(DEFAULTS.hasOwnProperty(k)) content[k] = o[k]; } }
+    }catch(e){}
+  }
+  function save(){
+    try{ localStorage.setItem(LS, JSON.stringify(content)); }catch(e){}
+  }
+
+  function telHref(s){ return "tel:" + String(s).replace(/[^0-9+]/g,""); }
+
+  function renderField(k){
+    var nodes = document.querySelectorAll('[data-field="'+k+'"]');
+    for(var i=0;i<nodes.length;i++){
+      var n = nodes[i], v = content[k] == null ? "" : String(content[k]);
+      if(k === "about"){
+        n.innerHTML = "";
+        v.split(/\n{2,}/).forEach(function(para){
+          if(!para.trim()) return;
+          var p = document.createElement("p");
+          p.textContent = para.trim();
+          n.appendChild(p);
+        });
+      } else if(k === "cPhones"){
+        n.innerHTML = "";
+        v.split(/\n+/).forEach(function(ph){
+          if(!ph.trim()) return;
+          var li = document.createElement("li");
+          var a = document.createElement("a");
+          a.href = telHref(ph); a.textContent = ph.trim();
+          li.appendChild(a); n.appendChild(li);
+        });
+      } else if(k === "cEmail"){
+        n.innerHTML = "";
+        var a = document.createElement("a");
+        a.href = "mailto:" + v; a.textContent = v;
+        n.appendChild(a);
+      } else if(k === "cZalo"){
+        n.innerHTML = "";
+        var digits = v.replace(/[^0-9]/g,"");
+        var za = document.createElement("a");
+        za.href = digits ? ("https://zalo.me/" + digits) : "#";
+        za.textContent = v; za.target = "_blank"; za.rel = "noopener";
+        n.appendChild(za);
+      } else {
+        n.textContent = v;
+      }
+    }
+    if(k === "ctaBtn1" || k === "ctaPhone"){
+      var call = document.getElementById("ctaCall");
+      if(call) call.href = telHref(content.ctaPhone || "");
+    }
+    if(k === "cEmail"){
+      var mail = document.getElementById("ctaMail");
+      if(mail) mail.href = "mailto:" + (content.cEmail || "");
+    }
+    if(k === "name"){ document.title = content.name || "AQ Tiến Anh"; }
+  }
+
+  function renderAll(){ for(var k in DEFAULTS) renderField(k); }
+
+  function fillInputs(){
+    var inputs = document.querySelectorAll("[data-bind]");
+    for(var i=0;i<inputs.length;i++){
+      var k = inputs[i].getAttribute("data-bind");
+      if(content[k] != null) inputs[i].value = content[k];
+    }
+  }
+
+  function bindInputs(){
+    var inputs = document.querySelectorAll("[data-bind]");
+    for(var i=0;i<inputs.length;i++){
+      (function(inp){
+        var k = inp.getAttribute("data-bind");
+        inp.addEventListener("input", function(){
+          content[k] = inp.value;
+          renderField(k);
+          save();
+        });
+      })(inputs[i]);
+    }
+  }
+
+  // Drawer
+  var drawer = document.getElementById("drawer");
+  var scrim = document.getElementById("scrim");
+  var fab = document.getElementById("fab");
+  var lastFocus = null;
+
+  function openDrawer(){
+    lastFocus = document.activeElement;
+    drawer.classList.add("open");
+    scrim.classList.add("show");
+    fab.setAttribute("aria-expanded","true");
+    var f = drawer.querySelector("input,textarea,button");
+    if(f) f.focus();
+  }
+  function closeDrawer(){
+    drawer.classList.remove("open");
+    scrim.classList.remove("show");
+    fab.setAttribute("aria-expanded","false");
+    if(lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  fab.addEventListener("click", openDrawer);
+  scrim.addEventListener("click", closeDrawer);
+  document.getElementById("closeDrawer").addEventListener("click", closeDrawer);
+  document.addEventListener("keydown", function(e){
+    if(e.key === "Escape" && drawer.classList.contains("open")) closeDrawer();
+  });
+
+  // Actions
+  var resetBtn = document.getElementById("resetBtn");
+  var resetArmed = false, resetTimer = null;
+  resetBtn.addEventListener("click", function(){
+    if(!resetArmed){
+      resetArmed = true;
+      resetBtn.textContent = "Bấm lần nữa để xác nhận";
+      resetTimer = setTimeout(function(){ resetArmed = false; resetBtn.textContent = "Khôi phục mặc định"; }, 3500);
+      return;
+    }
+    clearTimeout(resetTimer); resetArmed = false; resetBtn.textContent = "Khôi phục mặc định";
+    content = JSON.parse(JSON.stringify(DEFAULTS));
+    try{ localStorage.removeItem(LS); }catch(e){}
+    renderAll(); fillInputs();
+  });
+
+  var copyBtn = document.getElementById("copyBtn");
+  var jsonOut = document.getElementById("jsonOut");
+  copyBtn.addEventListener("click", function(){
+    var text = JSON.stringify(content, null, 2);
+    function fallback(){
+      jsonOut.hidden = false; jsonOut.value = text; jsonOut.focus(); jsonOut.select();
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){
+        copyBtn.textContent = "Đã sao chép ✓";
+        setTimeout(function(){ copyBtn.textContent = "Sao chép JSON"; }, 1800);
+      }, fallback);
+    } else { fallback(); }
+  });
+
+  document.getElementById("printBtn").addEventListener("click", function(){ window.print(); });
+
+  // Init
+  load();
+  renderAll();
+  fillInputs();
+  bindInputs();
+})();
+</script>
+
+</body>
+</html>
