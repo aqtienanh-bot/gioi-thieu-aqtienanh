@@ -744,6 +744,7 @@ Hai mảng tưởng như khác nhau, nhưng cùng chung một cách làm: khảo
 
   function load(){
     content = JSON.parse(JSON.stringify(DEFAULTS));
+    if(!EDIT_MODE) return;               // bản chia sẻ: luôn dùng nội dung gốc
     try{
       var s = localStorage.getItem(LS);
       if(s){ var o = JSON.parse(s); for(var k in o){ if(DEFAULTS.hasOwnProperty(k)) content[k] = o[k]; } }
@@ -827,71 +828,95 @@ Hai mảng tưởng như khác nhau, nhưng cùng chung một cách làm: khảo
     }
   }
 
-  // Drawer
-  var drawer = document.getElementById("drawer");
-  var scrim = document.getElementById("scrim");
-  var fab = document.getElementById("fab");
-  var lastFocus = null;
+  // Bảng chỉnh sửa — chỉ chạy ở chế độ biên tập (máy chính / bản xem trước)
+  function wireDrawer(){
+    var drawer = document.getElementById("drawer");
+    var scrim = document.getElementById("scrim");
+    var fab = document.getElementById("fab");
+    if(!drawer || !scrim || !fab) return;
+    var lastFocus = null;
 
-  function openDrawer(){
-    lastFocus = document.activeElement;
-    drawer.classList.add("open");
-    scrim.classList.add("show");
-    fab.setAttribute("aria-expanded","true");
-    var f = drawer.querySelector("input,textarea,button");
-    if(f) f.focus();
-  }
-  function closeDrawer(){
-    drawer.classList.remove("open");
-    scrim.classList.remove("show");
-    fab.setAttribute("aria-expanded","false");
-    if(lastFocus && lastFocus.focus) lastFocus.focus();
-  }
-  fab.addEventListener("click", openDrawer);
-  scrim.addEventListener("click", closeDrawer);
-  document.getElementById("closeDrawer").addEventListener("click", closeDrawer);
-  document.addEventListener("keydown", function(e){
-    if(e.key === "Escape" && drawer.classList.contains("open")) closeDrawer();
-  });
-
-  // Actions
-  var resetBtn = document.getElementById("resetBtn");
-  var resetArmed = false, resetTimer = null;
-  resetBtn.addEventListener("click", function(){
-    if(!resetArmed){
-      resetArmed = true;
-      resetBtn.textContent = "Bấm lần nữa để xác nhận";
-      resetTimer = setTimeout(function(){ resetArmed = false; resetBtn.textContent = "Khôi phục mặc định"; }, 3500);
-      return;
+    function openDrawer(){
+      lastFocus = document.activeElement;
+      drawer.classList.add("open");
+      scrim.classList.add("show");
+      fab.setAttribute("aria-expanded","true");
+      var f = drawer.querySelector("input,textarea,button");
+      if(f) f.focus();
     }
-    clearTimeout(resetTimer); resetArmed = false; resetBtn.textContent = "Khôi phục mặc định";
-    content = JSON.parse(JSON.stringify(DEFAULTS));
-    try{ localStorage.removeItem(LS); }catch(e){}
-    renderAll(); fillInputs();
-  });
-
-  var copyBtn = document.getElementById("copyBtn");
-  var jsonOut = document.getElementById("jsonOut");
-  copyBtn.addEventListener("click", function(){
-    var text = JSON.stringify(content, null, 2);
-    function fallback(){
-      jsonOut.hidden = false; jsonOut.value = text; jsonOut.focus(); jsonOut.select();
+    function closeDrawer(){
+      drawer.classList.remove("open");
+      scrim.classList.remove("show");
+      fab.setAttribute("aria-expanded","false");
+      if(lastFocus && lastFocus.focus) lastFocus.focus();
     }
-    if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(text).then(function(){
-        copyBtn.textContent = "Đã sao chép ✓";
-        setTimeout(function(){ copyBtn.textContent = "Sao chép JSON"; }, 1800);
-      }, fallback);
-    } else { fallback(); }
-  });
+    fab.addEventListener("click", openDrawer);
+    scrim.addEventListener("click", closeDrawer);
+    document.getElementById("closeDrawer").addEventListener("click", closeDrawer);
+    document.addEventListener("keydown", function(e){
+      if(e.key === "Escape" && drawer.classList.contains("open")) closeDrawer();
+    });
 
-  document.getElementById("printBtn").addEventListener("click", function(){ window.print(); });
+    var resetBtn = document.getElementById("resetBtn");
+    var resetArmed = false, resetTimer = null;
+    resetBtn.addEventListener("click", function(){
+      if(!resetArmed){
+        resetArmed = true;
+        resetBtn.textContent = "Bấm lần nữa để xác nhận";
+        resetTimer = setTimeout(function(){ resetArmed = false; resetBtn.textContent = "Khôi phục mặc định"; }, 3500);
+        return;
+      }
+      clearTimeout(resetTimer); resetArmed = false; resetBtn.textContent = "Khôi phục mặc định";
+      content = JSON.parse(JSON.stringify(DEFAULTS));
+      try{ localStorage.removeItem(LS); }catch(e){}
+      renderAll(); fillInputs();
+    });
 
-  // Init
+    var copyBtn = document.getElementById("copyBtn");
+    var jsonOut = document.getElementById("jsonOut");
+    copyBtn.addEventListener("click", function(){
+      var text = JSON.stringify(content, null, 2);
+      function fallback(){
+        jsonOut.hidden = false; jsonOut.value = text; jsonOut.focus(); jsonOut.select();
+      }
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(function(){
+          copyBtn.textContent = "Đã sao chép ✓";
+          setTimeout(function(){ copyBtn.textContent = "Sao chép JSON"; }, 1800);
+        }, fallback);
+      } else { fallback(); }
+    });
+
+    document.getElementById("printBtn").addEventListener("click", function(){ window.print(); });
+  }
+
+  // Chế độ biên tập: chỉ bật khi mở file trực tiếp trên máy, localhost,
+  // bản xem trước của Claude, hoặc thêm #edit vào URL. Bản web chia sẻ -> tắt hẳn.
+  var EDIT_MODE = (function(){
+    try{
+      if(location.protocol === "file:") return true;
+      var h = location.hostname || "";
+      if(h === "localhost" || h === "127.0.0.1" || h === "") return true;
+      if(/(^|\.)claudeusercontent\.com$/.test(h)) return true;
+      if(/(^|\.)claude\.(ai|site)$/.test(h)) return true;
+      if((location.hash || "") === "#edit") return true;
+    }catch(e){}
+    return false;
+  })();
+
   load();
   renderAll();
-  fillInputs();
-  bindInputs();
+
+  if(EDIT_MODE){
+    fillInputs();
+    bindInputs();
+    wireDrawer();
+  } else {
+    ["fab","scrim","drawer"].forEach(function(id){
+      var el = document.getElementById(id);
+      if(el && el.parentNode) el.parentNode.removeChild(el);
+    });
+  }
 })();
 </script>
 
