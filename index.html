@@ -2,14 +2,24 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8">
+<script>try{var __t=localStorage.getItem("aqta.theme");if(__t==="light"||__t==="dark")document.documentElement.setAttribute("data-theme",__t);}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Công ty TNHH MTV AQ Tiến Anh (MSDN 2802854585) — in ấn, quảng cáo, phần mềm kế toán, thiết kế website và tư vấn phong thủy ứng dụng tại Bỉm Sơn, Thanh Hóa. Tư vấn 24/7: 0972.776.588.">
-<meta property="og:title" content="Công ty TNHH MTV AQ Tiến Anh">
-<meta property="og:description" content="Thương mại — dịch vụ — tư vấn phong thủy ứng dụng. Một đầu mối, làm thật, chịu trách nhiệm.">
+<meta name="description" content="Công ty TNHH MTV AQ Tiến Anh (MSDN 2802854585) — biển hiệu quảng cáo, in ấn, phần mềm kế toán, thiết kế website và phong thuỷ ứng dụng: nhà ở, mộ phần, Bát Tự – Tử Vi, Kỳ Môn Độn Giáp, đặt tên cho con. Tại Phường Quang Trung, Bỉm Sơn, Thanh Hoá — tư vấn 0972.776.588.">
+<meta property="og:title" content="AQ Tiến Anh — Chín nhóm dịch vụ, một đầu mối chịu trách nhiệm">
+<meta property="og:description" content="Biển hiệu, in ấn, phần mềm kế toán, website và phong thuỷ ứng dụng — cùng một pháp nhân, một người trực tiếp chịu trách nhiệm cho mọi việc.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="vi_VN">
+<meta property="og:url" content="https://aqtienanh-bot.github.io/gioi-thieu-aqtienanh/">
+<link rel="canonical" href="https://aqtienanh-bot.github.io/gioi-thieu-aqtienanh/">
+<meta name="theme-color" content="#F1EBDF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#15161C" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23F1EBDF'/%3E%3Ccircle cx='50' cy='50' r='34' fill='none' stroke='%239E2B24' stroke-width='6'/%3E%3Cpath d='M50 28 l7 21 22 0 -18 13 7 21 -18-13 -18 13 7-21 -18-13 22 0 Z' fill='%239E2B24'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <title>AQ Tiến Anh</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=IBM+Plex+Mono:wght@500&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<script type="application/ld+json" id="ldBiz">{}</script>
+<script type="application/ld+json" id="ldFaq">{}</script>
 <style>
   :root{
     color-scheme: light dark;
@@ -80,8 +90,16 @@
     font-size:var(--step--1);text-transform:uppercase;letter-spacing:.16em;
     font-weight:600;color:var(--seal);margin:0 0 .9rem
   }
-  section{border-top:1px solid var(--line);padding-block:clamp(3rem,7vw,5rem)}
+  section{border-top:1px solid var(--line);padding-block:clamp(3rem,7vw,5rem);scroll-margin-top:4.4rem}
   .lead{color:var(--ink-soft);font-size:var(--step-1);line-height:1.55;max-width:38rem}
+
+  /* Skip link (a11y) */
+  .skip-link{
+    position:absolute;left:-999px;top:-999px;
+    background:var(--seal);color:#fff;padding:.65rem 1.1rem;border-radius:6px;
+    font-size:.85rem;font-weight:600;text-decoration:none;z-index:100
+  }
+  .skip-link:focus{left:1rem;top:1rem}
 
   /* Top bar */
   .topbar{
@@ -93,19 +111,63 @@
   }
   .topbar .row{
     max-width:var(--maxw-wide);margin:0 auto;padding:.7rem var(--pad);
-    display:flex;justify-content:space-between;align-items:baseline;gap:1rem
+    display:flex;justify-content:space-between;align-items:center;gap:1rem
   }
   .brand{font-family:"Newsreader",serif;font-weight:600;font-size:1.05rem;letter-spacing:.02em;text-decoration:none}
   .topbar nav{display:flex;gap:1.35rem;font-size:var(--step--1)}
   .topbar nav a{color:var(--ink-soft);text-decoration:none;transition:color .15s}
   .topbar nav a:hover{color:var(--seal)}
-  @media (max-width:720px){.topbar nav{display:none}}
+  .topbar nav a.active{color:var(--seal)}
+  .theme-toggle{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:2.1rem;height:2.1rem;padding:0;border-radius:6px;
+    border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;flex:none;
+    font-size:1rem;line-height:1
+  }
+  .theme-toggle:hover{border-color:var(--seal);color:var(--seal)}
+  .menu-toggle{
+    display:none;align-items:center;justify-content:center;
+    width:2.1rem;height:2.1rem;padding:0;border-radius:6px;
+    border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;flex:none
+  }
+  .menu-toggle:hover{border-color:var(--seal);color:var(--seal)}
+  .menu-toggle svg{width:1.05rem;height:1.05rem}
+  @media (max-width:720px){
+    .menu-toggle{display:inline-flex}
+    .topbar nav{
+      display:flex;flex-direction:column;gap:0;
+      position:absolute;left:0;right:0;top:100%;
+      background:var(--surface);border-bottom:1px solid var(--line);box-shadow:var(--shadow);
+      max-height:0;overflow:hidden;visibility:hidden;transition:max-height .22s ease
+    }
+    .topbar nav a{padding:.85rem var(--pad);border-top:1px solid var(--line)}
+    .topbar nav a:first-child{border-top:0}
+    .topbar.nav-open nav{max-height:70vh;overflow-y:auto;visibility:visible}
+  }
+
+  /* Mobile quick-contact bar */
+  .mobile-cta{display:none}
+  @media (max-width:720px){
+    body{padding-bottom:3.6rem}
+    .mobile-cta{
+      display:flex;position:fixed;left:0;right:0;bottom:0;z-index:45;
+      border-top:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow);
+      padding-bottom:env(safe-area-inset-bottom,0)
+    }
+    .mobile-cta-btn{
+      flex:1;display:flex;align-items:center;justify-content:center;gap:.4rem;
+      padding:.85rem .5rem;font-weight:600;font-size:.92rem;text-decoration:none;color:var(--ink)
+    }
+    .mobile-cta-btn.call{border-right:1px solid var(--line)}
+    .mobile-cta-btn.zalo{color:var(--seal)}
+    html.edit .fab{bottom:4.6rem}
+  }
 
   /* Top accent */
   .top-accent{height:3px;background:linear-gradient(90deg,var(--brass),var(--seal) 55%,var(--seal-deep))}
 
   /* Hero */
-  .hero{position:relative;overflow:clip;border-top:0;isolation:isolate}
+  .hero{position:relative;overflow:clip;border-top:0;isolation:isolate;scroll-margin-top:4.4rem}
   .hero-bg{
     position:absolute;inset:0;z-index:-1;overflow:clip;
     background:
@@ -236,12 +298,49 @@
   .ledger dd.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;letter-spacing:.01em}
   .legal-note{margin-top:1.1rem;font-size:var(--step--1);color:var(--ink-soft);font-style:italic}
   @media (max-width:620px){.ledger>div{grid-template-columns:1fr;gap:.2rem}}
+  .copy-row{display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap}
+  .copy-mini{
+    font-family:"Be Vietnam Pro",inherit;font-size:.72rem;font-weight:600;padding:.22rem .55rem;border-radius:5px;
+    border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);cursor:pointer;
+    transition:border-color .15s,color .15s;flex:none
+  }
+  .copy-mini:hover{border-color:var(--seal);color:var(--seal)}
+
+  /* Process / Quy trình */
+  .process-list{list-style:none;margin:2rem 0 0;padding:0;counter-reset:step}
+  .process-list li{padding:1.4rem 0 1.4rem 3.1rem;border-top:1px solid var(--line);position:relative}
+  .process-list li::before{
+    counter-increment:step;content:counter(step);position:absolute;left:0;top:1.35rem;
+    width:1.9rem;height:1.9rem;border-radius:50%;border:1px solid var(--seal);color:var(--seal);
+    font-family:"IBM Plex Mono",monospace;font-size:.85rem;font-weight:600;
+    display:flex;align-items:center;justify-content:center;flex:none
+  }
+  .process-list h3{font-size:1.08rem;font-weight:600;margin-bottom:.5rem}
+  .process-split{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:.3rem}
+  .process-split div{font-size:.93rem;color:var(--ink-soft);line-height:1.55}
+  .process-split strong{
+    display:block;color:var(--ink);font-weight:600;font-size:.74rem;
+    text-transform:uppercase;letter-spacing:.07em;margin-bottom:.3rem
+  }
+  @media (max-width:640px){.process-split{grid-template-columns:1fr;gap:.5rem}}
+
+  /* FAQ */
+  .faq-group{margin-top:2rem}
+  .faq-group:first-of-type{margin-top:1.6rem}
+  .faq-group-title{
+    font-size:var(--step--1);text-transform:uppercase;letter-spacing:.08em;font-weight:600;
+    color:var(--brass);margin:0 0 .3rem
+  }
+  .faq-group details{border-top:1px solid var(--line)}
+  .faq-group summary{font-size:1rem;padding:.9rem 0}
+  .faq-group details p{padding-bottom:.8rem;color:var(--ink-soft);font-size:.95rem;line-height:1.6}
 
   /* Final CTA */
   .finalcta{background:var(--surface)}
   .finalcta h2{font-size:clamp(1.6rem,4vw,2.35rem);font-weight:600;max-width:30rem}
   .finalcta .lead{margin-top:1rem}
   .finalcta .cta-row{margin-top:1.8rem}
+  .finalcta .cta-note{margin-top:.9rem;font-size:var(--step--1);color:var(--ink-soft)}
 
   /* Contact */
   .contact-grid{display:grid;grid-template-columns:15rem 1fr;gap:1rem 1.4rem;margin-top:1.6rem}
@@ -314,7 +413,7 @@
     .motif-seal{animation:none!important}
   }
   @media print{
-    .topbar,.fab,.scrim,.drawer,.hero-bg,.motif,.legal .seal,.top-accent{display:none!important}
+    .topbar,.fab,.scrim,.drawer,.hero-bg,.motif,.legal .seal,.top-accent,.mobile-cta,.skip-link,.copy-mini{display:none!important}
     body{background:#fff;color:#000}
     .hero-panel{box-shadow:none;border-color:#ccc}
     .hero-panel::before,.corner{display:none!important}
@@ -325,22 +424,29 @@
 </head>
 <body>
 
+<a class="skip-link" href="#top">Bỏ qua để đến nội dung chính</a>
 <div class="top-accent"></div>
 <div class="topbar">
   <div class="row">
     <a href="#top" class="brand" data-field="name">AQ Tiến Anh</a>
-    <nav>
+    <nav id="mainNav">
       <a href="#van-de">Vấn đề</a>
+      <a href="#phap-ly">Pháp lý</a>
       <a href="#giai-phap">Lĩnh vực</a>
+      <a href="#quy-trinh">Quy trình</a>
       <a href="#vi-sao">Vì sao chọn</a>
       <a href="#ve-cong-ty">Về công ty</a>
-      <a href="#phap-ly">Pháp lý</a>
+      <a href="#faq">Hỏi đáp</a>
       <a href="#lien-he">Liên hệ</a>
     </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Đổi giao diện sáng/tối">🌙</button>
+    <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Mở menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
   </div>
 </div>
 
-<header class="hero" id="top">
+<header class="hero" id="top" tabindex="-1">
   <div class="hero-bg" aria-hidden="true">
     <svg class="motif motif-bagua" viewBox="0 0 100 100">
       <polygon points="30,3 70,3 97,30 97,70 70,97 30,97 3,70 3,30" fill="none" stroke="currentColor" stroke-width="2"/>
@@ -357,13 +463,13 @@
   <div class="wrap">
     <div class="hero-panel">
       <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-      <p class="hero-kicker" data-field="heroKicker">AQ Tiến Anh là doanh nghiệp thương mại &amp; dịch vụ đa lĩnh vực chuyên sâu.</p>
-      <h1 data-field="heroTitle">Từ tấm biển hiệu đến lá số cho con — một nơi lo trọn.</h1>
+      <p class="hero-kicker" data-field="heroKicker">In ấn · Quảng cáo · Phần mềm kế toán · Website · Phong thuỷ nhà ở · Lá số &amp; đặt tên cho con — tất cả dưới một pháp nhân, một người chịu trách nhiệm.</p>
+      <h1 data-field="heroTitle">Việc tôi nhận, tôi làm đến nơi đến chốn.</h1>
       <span class="rule"></span>
-      <p class="sub" data-field="heroSub">In ấn · Quảng cáo · Phần mềm kế toán · Thiết kế website — và tư vấn phong thuỷ nhà ở, mộ phần, lập lá số Bát Tự – Tử Vi, đặt tên cho con theo phong thuỷ. Nhiều lĩnh vực, mỗi lĩnh vực làm đến nơi đến chốn.</p>
+      <p class="sub" data-field="heroSub">Công ty TNHH MTV AQ Tiến Anh — mã số doanh nghiệp 2802854585, đăng ký từ 2020 tại Thanh Hoá. Mọi việc bạn thấy dưới đây, từ một tấm biển hiệu đến một lá số tử vi, đều do cùng một người trực tiếp nhận và chịu trách nhiệm — không giao qua trung gian, không ẩn danh.</p>
       <div class="cta-row">
-        <a class="btn btn-primary" href="#lien-he" data-field="heroCtaPrimary">Nhận tư vấn miễn phí</a>
-        <a class="btn btn-secondary" href="#giai-phap" data-field="heroCtaSecondary">Xem tám lĩnh vực</a>
+        <a class="btn btn-primary" href="https://zalo.me/0972776588" target="_blank" rel="noopener" data-field="heroCtaPrimary">Nhắn Zalo đặt lịch tư vấn riêng</a>
+        <a class="btn btn-secondary" href="tel:0972776588" data-field="heroCtaSecondary">Gọi thử hỏi nhanh: 0972.776.588</a>
       </div>
       <ul class="chips" aria-label="Các lĩnh vực">
         <li>In ấn</li>
@@ -373,13 +479,14 @@
         <li>Phong thuỷ nhà ở</li>
         <li>Phong thuỷ mộ phần</li>
         <li>Bát Tự &amp; Tử Vi</li>
+        <li>Kỳ Môn Độn Giáp</li>
         <li>Đặt tên cho con</li>
       </ul>
       <div class="trust">
         <span data-field="trust1">Thành lập ngày 24/06/2020</span>
         <span data-field="trust2">Mã số doanh nghiệp 2802854585</span>
         <span data-field="trust3">Trụ sở tại Phường Quang Trung, Thanh Hoá</span>
-        <span data-field="trust4">Tám nhóm dịch vụ · một đầu mối chịu trách nhiệm</span>
+        <span data-field="trust4">Chín nhóm dịch vụ · một đầu mối chịu trách nhiệm</span>
       </div>
     </div>
   </div>
@@ -391,37 +498,61 @@
     <h2 class="finalcta-h" data-field="problemHeading" style="font-size:clamp(1.5rem,3.6vw,2rem);font-weight:600">Mỗi việc một nơi, mỗi nơi một kiểu — và không ai theo bạn đến cùng.</h2>
     <p class="lead" data-field="problemLead" style="margin-top:1rem">Doanh nghiệp cần in ấn, biển quảng cáo, phần mềm, website. Gia đình cần xem hướng nhà, chọn ngày, lập lá số, đặt tên cho con. Thường thì mỗi việc lại phải tìm một người khác nhau.</p>
     <ul class="prob-list">
-      <li data-field="prob1">In ấn – quảng cáo mỗi lần đặt một nơi: mẫu mã, màu sắc và chất lượng không đồng nhất, lại hay trễ hẹn.</li>
-      <li data-field="prob2">Phần mềm kế toán hay website mua xong bị bỏ mặc — không ai hướng dẫn, không ai sửa khi phát sinh lỗi.</li>
-      <li data-field="prob3">Tư vấn phong thuỷ nhà ở, mộ phần mỗi người nói một kiểu; nghe xong càng phân vân, không biết tin ai.</li>
-      <li data-field="prob4">Lập lá số, đặt tên cho con làm vội qua mạng, nhận về vài dòng, không ai giải thích cặn kẽ.</li>
+      <li data-field="prob1">Lô tờ rơi in lần sau khác màu lần trước, hẹn 3 ngày kéo dài thành 10, không ai nhận lỗi.</li>
+      <li data-field="prob2">Website bàn giao xong, sáu tháng sau muốn đổi một cái giá bán cũng phải nhắn tin chờ, có khi không ai trả lời.</li>
+      <li data-field="prob3">Hỏi ba người phong thuỷ về hướng nhà, nhận về ba câu trả lời khác nhau — không biết tin ai, cũng không ai giải thích vì sao.</li>
+      <li data-field="prob4">Gần ngày làm giấy khai sinh mới cuống tìm chỗ đặt tên, nhận vài dòng qua tin nhắn, không kịp hỏi lại cho rõ.</li>
     </ul>
+  </div>
+</section>
+
+<section id="phap-ly" class="legal">
+  <svg class="seal" viewBox="0 0 120 120" aria-hidden="true">
+    <circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" stroke-width="2"/>
+    <circle cx="60" cy="60" r="45" fill="none" stroke="currentColor" stroke-width="1"/>
+    <path d="M60 22 l9.3 28.6 30.1 0 -24.4 17.7 9.3 28.6 -24.3-17.7 -24.3 17.7 9.3-28.6 -24.4-17.7 30.1 0 Z" fill="currentColor"/>
+  </svg>
+  <div class="wrap-wide">
+    <p class="eyebrow" data-field="legalEyebrow">Thông tin pháp lý</p>
+    <h2 data-field="legalHeading" style="font-size:clamp(1.6rem,3.8vw,2.2rem);font-weight:600">Trích Giấy chứng nhận đăng ký doanh nghiệp</h2>
+    <dl class="ledger">
+      <div><dt>Tên đầy đủ</dt><dd data-field="fullname">CÔNG TY TNHH MỘT THÀNH VIÊN AQ TIẾN ANH</dd></div>
+      <div><dt>Tên giao dịch</dt><dd data-field="tradename">AQ TIẾN ANH</dd></div>
+      <div><dt>Mã số doanh nghiệp</dt><dd class="mono copy-row"><span data-field="msdn">2802854585</span><button class="copy-mini" type="button" data-copy="msdn" aria-label="Sao chép mã số doanh nghiệp">Sao chép</button></dd></div>
+      <div><dt>Ngày đăng ký lần đầu</dt><dd class="mono" data-field="regdate">24/06/2020</dd></div>
+      <div><dt>Cơ quan cấp</dt><dd data-field="regoffice">Phòng Đăng ký kinh doanh — Sở Kế hoạch và Đầu tư tỉnh Thanh Hoá</dd></div>
+      <div><dt>Loại hình</dt><dd data-field="legaltype">Công ty TNHH một thành viên</dd></div>
+      <div><dt>Trụ sở chính</dt><dd data-field="hq">131 Lý Thái Tổ, TDP 12, Phường Quang Trung, Tỉnh Thanh Hoá</dd></div>
+      <div><dt>Người đại diện theo pháp luật</dt><dd data-field="rep">ThS. Nguyễn Vinh Quang — Giám đốc</dd></div>
+      <div><dt>Tài khoản ngân hàng</dt><dd class="mono copy-row"><span data-field="bank">16171888888 — Ngân hàng TMCP Á Châu (ACB), Chi nhánh Bỉm Sơn</span><button class="copy-mini" type="button" data-copy="bank" aria-label="Sao chép số tài khoản ngân hàng">Sao chép</button></dd></div>
+    </dl>
+    <p class="legal-note" data-field="legalNote">Thông tin nêu trên trích từ Giấy chứng nhận đăng ký doanh nghiệp. Mọi hợp đồng, hoá đơn và cam kết bảo hành đều được lập bằng văn bản theo pháp nhân này. Bạn có thể tự tra cứu mã số 2802854585 tại Cổng thông tin quốc gia về đăng ký doanh nghiệp (dangkykinhdoanh.gov.vn) để đối chiếu đúng tên công ty và người đại diện, trước khi quyết định làm việc với chúng tôi.</p>
   </div>
 </section>
 
 <section id="giai-phap">
   <div class="wrap">
     <p class="eyebrow" data-field="solEyebrow">Lĩnh vực hoạt động</p>
-    <h2 data-field="solHeading" style="font-size:clamp(1.6rem,3.8vw,2.2rem);font-weight:600">Tám nhóm dịch vụ, hai thế mạnh — một đầu mối.</h2>
-    <p class="lead" data-field="solLead" style="margin-top:1rem">AQ Tiến Anh làm song song hai mảng: dịch vụ phục vụ công việc kinh doanh, và phong thuỷ ứng dụng phục vụ việc hệ trọng của gia đình. Cùng một cách làm: khảo kỹ, tư vấn thật, bàn giao rõ ràng.</p>
+    <h2 data-field="solHeading" style="font-size:clamp(1.6rem,3.8vw,2.2rem);font-weight:600">Chín nhóm dịch vụ, hai thế mạnh — một đầu mối.</h2>
+    <p class="lead" data-field="solLead" style="margin-top:1rem">AQ Tiến Anh làm song song hai mảng: dịch vụ phục vụ công việc kinh doanh, và phong thuỷ ứng dụng phục vụ việc hệ trọng của gia đình. Cùng một cách làm: khảo kỹ, tư vấn thật, bàn giao rõ ràng. Chúng tôi không niêm yết một bảng giá chung vì quy mô mỗi việc thực sự khác nhau — báo giá gửi trong vòng 24 giờ sau khi trao đổi, kèm điều khoản bằng văn bản, không phải một con số nói miệng.</p>
 
     <h3 class="sol-cat" data-field="solCatA">Dịch vụ cho doanh nghiệp &amp; cửa hàng</h3>
     <div class="sol-grid">
       <div class="sol">
-        <h3 data-field="sol1t">In ấn</h3>
-        <p data-field="sol1d">Tờ rơi, hồ sơ, catalogue, kẹp file, tem nhãn, decal, ảnh. In nhanh, màu chuẩn, chất lượng ổn định giữa các lần đặt.</p>
+        <h3 data-field="sol1t">Biển hiệu &amp; Quảng cáo</h3>
+        <p data-field="sol1d">Biển hiệu lắp đúng ngày đã hẹn, đúng màu bản thiết kế đã duyệt — khách đi ngang phố nhận ra cửa hàng của bạn ngay từ lần nhìn đầu tiên.</p>
       </div>
       <div class="sol">
-        <h3 data-field="sol2t">Quảng cáo</h3>
-        <p data-field="sol2d">Biển hiệu, hộp đèn, standee, banner, backdrop và bộ nhận diện. Thiết kế và thi công trọn gói, bảo hành rõ ràng.</p>
+        <h3 data-field="sol2t">In ấn</h3>
+        <p data-field="sol2d">Lô in sau giống hệt lô in trước — không còn tình trạng logo lần này một màu, lần khác một màu.</p>
       </div>
       <div class="sol">
-        <h3 data-field="sol3t">Phần mềm kế toán AQ Tiến Anh</h3>
-        <p data-field="sol3d">Lập chứng từ, ghi sổ, in ấn theo chuẩn; chạy ngoại tuyến, khoá bản quyền theo tên đơn vị. Bàn giao kèm hướng dẫn và hỗ trợ về sau.</p>
+        <h3 data-field="sol3t">Thiết kế website</h3>
+        <p data-field="sol3d">Bạn tự sửa được giá, sửa được tin trên trang của mình ngay khi cần — không phải nhắn tin chờ người khác sửa hộ.</p>
       </div>
       <div class="sol">
-        <h3 data-field="sol4t">Thiết kế website</h3>
-        <p data-field="sol4d">Trang giới thiệu công ty, trang bán hàng, landing page. Bàn giao kèm bảng tự chỉnh sửa nội dung — bạn tự cập nhật, không phụ thuộc.</p>
+        <h3 data-field="sol4t">Phần mềm kế toán</h3>
+        <p data-field="sol4d">Sổ sách lập đúng chuẩn ngay từ đầu — khi cơ quan thuế hỏi đến, bạn có sẵn chứng từ, không phải làm lại trong hoảng loạn.</p>
       </div>
     </div>
 
@@ -429,21 +560,70 @@
     <div class="sol-grid">
       <div class="sol">
         <h3 data-field="sol5t">Phong thuỷ nhà ở</h3>
-        <p data-field="sol5d">Xem hướng, bố cục công năng, ngày giờ động thổ – nhập trạch. Khảo sát thực địa hoặc theo bản vẽ, tư vấn phương án khả thi.</p>
+        <p data-field="sol5d">Bạn động thổ, nhập trạch với một phương án đã được khảo sát và giải thích rõ ràng — không còn phân vân nhà mình có "phạm" gì không.</p>
       </div>
       <div class="sol">
-        <h3 data-field="sol6t">Phong thuỷ mộ phần</h3>
-        <p data-field="sol6d">Chọn đất, chọn hướng, chọn ngày giờ an táng – cải táng. Tư vấn trên tinh thần trọng lễ nghi và tâm nguyện gia đình.</p>
+        <h3 data-field="sol6t">Lá số Bát Tự &amp; Tử Vi</h3>
+        <p data-field="sol6d">Bạn cầm trong tay một bản luận giải viết rõ ràng để đọc lại bất cứ lúc nào cần quyết định — không phải nhớ lại vài câu nói vội qua điện thoại.</p>
       </div>
       <div class="sol">
-        <h3 data-field="sol7t">Lá số Bát Tự &amp; Tử Vi</h3>
-        <p data-field="sol7d">Luận giải vận mệnh, điểm mạnh – điểm cần lưu ý, các năm quan trọng. Giải thích cặn kẽ, giao bản luận viết tay hoặc đánh máy.</p>
+        <h3 data-field="sol7t">Đặt tên cho con</h3>
+        <p data-field="sol7d">Bạn chọn được một cái tên vừa hợp mệnh con, vừa dễ gọi dễ viết — không phải phân vân giữa những cái tên đẹp nghĩa nhưng khó hợp.</p>
       </div>
       <div class="sol">
-        <h3 data-field="sol8t">Đặt tên cho con theo phong thuỷ</h3>
-        <p data-field="sol8d">Cân bằng Bát Tự của bé, hài hoà với mệnh cha mẹ, đẹp về ý nghĩa và dễ gọi. Đề xuất nhiều phương án kèm phân tích.</p>
+        <h3 data-field="sol8t">Phong thuỷ mộ phần</h3>
+        <p data-field="sol8d">Gia đình an tâm chọn được ngày giờ, hướng đặt phù hợp cho việc an táng — cải táng, đúng lễ nghi, không phải tự dò hỏi nhiều nơi trong lúc bối rối.</p>
+      </div>
+      <div class="sol">
+        <h3 data-field="sol9t">Lá số Kỳ Môn Độn Giáp</h3>
+        <p data-field="sol9d">Bạn biết đúng thời điểm nên hành động cho một việc quan trọng — khai trương, ký kết, khởi sự — dựa trên lá số lập riêng cho đúng tình huống đó, không phải chọn ngày theo lịch chung chung.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<section id="quy-trinh">
+  <div class="wrap">
+    <p class="eyebrow" data-field="processEyebrow">Cách chúng tôi làm việc</p>
+    <h2 data-field="processHeading" style="font-size:clamp(1.6rem,3.8vw,2.2rem);font-weight:600">Năm bước, áp dụng cho mọi việc bạn giao</h2>
+    <p class="lead" data-field="processLead" style="margin-top:1rem">Một quy trình chung cho cả hai mảng — chỉ khác nhau ở cách thực hiện từng bước.</p>
+    <ol class="process-list">
+      <li>
+        <h3 data-field="step1t">Tiếp nhận &amp; khảo sát</h3>
+        <div class="process-split">
+          <div><strong>Doanh nghiệp</strong><span data-field="step1a">Khảo sát trực tiếp mặt bằng/hiện trạng hoặc yêu cầu kỹ thuật, đo đạc và ghi nhận cụ thể.</span></div>
+          <div><strong>Phong thuỷ</strong><span data-field="step1b">Khảo sát nhà đất thực tế hoặc theo bản vẽ, thu thập ngày giờ sinh của những người liên quan.</span></div>
+        </div>
+      </li>
+      <li>
+        <h3 data-field="step2t">Đề xuất phương án</h3>
+        <div class="process-split">
+          <div><strong>Doanh nghiệp</strong><span data-field="step2a">Gửi bản thiết kế/báo giá cụ thể trong vòng 24 giờ.</span></div>
+          <div><strong>Phong thuỷ</strong><span data-field="step2b">Trình bày phân tích và các phương án khả thi, giải thích rõ căn cứ đưa ra từng phương án.</span></div>
+        </div>
+      </li>
+      <li>
+        <h3 data-field="step3t">Xác nhận &amp; thực hiện</h3>
+        <div class="process-split">
+          <div><strong>Doanh nghiệp</strong><span data-field="step3a">Khách duyệt mẫu, ký báo giá, tiến hành thi công/lập trình theo đúng bản đã duyệt.</span></div>
+          <div><strong>Phong thuỷ</strong><span data-field="step3b">Gia đình chọn phương án, chúng tôi lập lá số hoặc hoàn thiện phần luận giải chi tiết.</span></div>
+        </div>
+      </li>
+      <li>
+        <h3 data-field="step4t">Bàn giao bằng văn bản</h3>
+        <div class="process-split">
+          <div><strong>Doanh nghiệp</strong><span data-field="step4a">Nghiệm thu cùng khách, bàn giao kèm hướng dẫn sử dụng và phiếu bảo hành ghi rõ thời hạn.</span></div>
+          <div><strong>Phong thuỷ</strong><span data-field="step4b">Giao bản luận giải viết rõ ràng, giải thích trực tiếp từng điểm.</span></div>
+        </div>
+      </li>
+      <li>
+        <h3 data-field="step5t">Đồng hành sau đó</h3>
+        <div class="process-split">
+          <div><strong>Doanh nghiệp</strong><span data-field="step5a">Hỗ trợ sửa lỗi, điều chỉnh trong thời hạn bảo hành, không phát sinh phí cho lỗi thuộc về chúng tôi.</span></div>
+          <div><strong>Phong thuỷ</strong><span data-field="step5b">Sẵn sàng giải đáp thêm nếu gia đình có câu hỏi phát sinh sau khi đã triển khai phương án.</span></div>
+        </div>
+      </li>
+    </ol>
   </div>
 </section>
 
@@ -458,6 +638,8 @@
       <li data-field="proof3">Doanh nghiệp có hợp đồng, báo giá và chứng từ đầy đủ; phần tư vấn phong thuỷ giao kèm bản luận giải bằng văn bản để gia đình lưu lại.</li>
       <li data-field="proof4">Gắn bó với địa phương: khách hàng có thể đến làm việc trực tiếp tại trụ sở 131 Lý Thái Tổ, TDP 12, Phường Quang Trung, Tỉnh Thanh Hoá.</li>
       <li data-field="proof5">Tư vấn phong thuỷ trên tinh thần tôn trọng tín ngưỡng và quan sát thực tế — nói rõ điều làm được và không làm được, không hù doạ, không ép mua vật phẩm.</li>
+      <li data-field="proof6">Chúng tôi chưa đưa lên đây một con số kết quả cụ thể vì chưa có dữ liệu đủ minh bạch để công bố — sẽ cập nhật khi có, không tô vẽ trước.</li>
+      <li data-field="proof7">Hai lĩnh vực khác xa nhau, nhưng chỉ một người ký tên chịu trách nhiệm cho cả hai — việc nào chúng tôi không đủ sức làm đến nơi đến chốn, chúng tôi từ chối ngay từ đầu, không nhận đại cho có.</li>
     </ul>
   </div>
 </section>
@@ -474,39 +656,59 @@ Hai mảng tưởng như khác nhau, nhưng cùng chung một cách làm: khảo
   </div>
 </section>
 
-<section id="phap-ly" class="legal">
-  <svg class="seal" viewBox="0 0 120 120" aria-hidden="true">
-    <circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" stroke-width="2"/>
-    <circle cx="60" cy="60" r="45" fill="none" stroke="currentColor" stroke-width="1"/>
-    <path d="M60 22 l9.3 28.6 30.1 0 -24.4 17.7 9.3 28.6 -24.3-17.7 -24.3 17.7 9.3-28.6 -24.4-17.7 30.1 0 Z" fill="currentColor"/>
-  </svg>
-  <div class="wrap-wide">
-    <p class="eyebrow" data-field="legalEyebrow">Thông tin pháp lý</p>
-    <h2 data-field="legalHeading" style="font-size:clamp(1.6rem,3.8vw,2.2rem);font-weight:600">Trích Giấy chứng nhận đăng ký doanh nghiệp</h2>
-    <dl class="ledger">
-      <div><dt>Tên đầy đủ</dt><dd data-field="fullname">CÔNG TY TNHH MỘT THÀNH VIÊN AQ TIẾN ANH</dd></div>
-      <div><dt>Tên giao dịch</dt><dd data-field="tradename">AQ TIẾN ANH</dd></div>
-      <div><dt>Mã số doanh nghiệp</dt><dd class="mono" data-field="msdn">2802854585</dd></div>
-      <div><dt>Ngày đăng ký lần đầu</dt><dd class="mono" data-field="regdate">24/06/2020</dd></div>
-      <div><dt>Cơ quan cấp</dt><dd data-field="regoffice">Phòng Đăng ký kinh doanh — Sở Kế hoạch và Đầu tư tỉnh Thanh Hoá</dd></div>
-      <div><dt>Loại hình</dt><dd data-field="legaltype">Công ty TNHH một thành viên</dd></div>
-      <div><dt>Trụ sở chính</dt><dd data-field="hq">131 Lý Thái Tổ, TDP 12, Phường Quang Trung, Tỉnh Thanh Hoá</dd></div>
-      <div><dt>Người đại diện theo pháp luật</dt><dd data-field="rep">ThS. Nguyễn Vinh Quang — Giám đốc</dd></div>
-      <div><dt>Tài khoản ngân hàng</dt><dd class="mono" data-field="bank">16171888888 — Ngân hàng TMCP Á Châu (ACB), Chi nhánh Bỉm Sơn</dd></div>
-    </dl>
-    <p class="legal-note" data-field="legalNote">Thông tin nêu trên trích từ Giấy chứng nhận đăng ký doanh nghiệp. Mọi hợp đồng, hoá đơn và cam kết bảo hành đều được lập bằng văn bản theo pháp nhân này.</p>
+<section id="faq">
+  <div class="wrap">
+    <p class="eyebrow" data-field="faqEyebrow">Câu hỏi thường gặp</p>
+    <h2 data-field="faqHeading" style="font-size:clamp(1.6rem,3.8vw,2.2rem);font-weight:600">Những điều khách thường hỏi trước khi quyết định</h2>
+
+    <div class="faq-group">
+      <p class="faq-group-title" data-field="faqGroupGeneral">Chung cho cả công ty</p>
+      <details>
+        <summary data-field="faq1q">Công ty làm nhiều lĩnh vực khác nhau, chuyên môn có thật sự sâu hay chỉ biết sơ sơ?</summary>
+        <p data-field="faq1a">Đúng là chúng tôi làm nhiều lĩnh vực thật — nhưng mỗi lĩnh vực chỉ được nhận theo đúng năng lực thực tế, không nhận đại cho đủ danh mục; việc nào vượt quá khả năng, chúng tôi nói thẳng ngay từ đầu, kể cả khi điều đó có nghĩa là mất một khách hàng.</p>
+      </details>
+      <details>
+        <summary data-field="faq2q">Giá ở đây có cao hơn nơi khác không, và vì sao?</summary>
+        <p data-field="faq2a">Có thể cao hơn một xưởng in không tên hoặc một buổi xem qua mạng — vì mỗi việc đều có khảo sát thực tế, cam kết bằng văn bản và một người trực tiếp chịu trách nhiệm nếu có sai sót, không chỉ là một sản phẩm hay một câu trả lời miệng.</p>
+      </details>
+    </div>
+
+    <div class="faq-group">
+      <p class="faq-group-title" data-field="faqGroupPT">Riêng mảng phong thuỷ</p>
+      <details>
+        <summary data-field="faq3q">Tư vấn phong thuỷ có phải chỉ để bán vật phẩm phong thuỷ không?</summary>
+        <p data-field="faq3a">Không. Chúng tôi không bán vật phẩm phong thuỷ kèm theo buổi tư vấn; phần bàn giao duy nhất là bản luận giải bằng văn bản, còn lại là quyết định của gia đình bạn.</p>
+      </details>
+      <details>
+        <summary data-field="faq4q">Nếu ở xa thì khảo sát phong thuỷ thế nào?</summary>
+        <p data-field="faq4a">Khảo sát phong thuỷ có thể thực hiện qua bản vẽ và hình ảnh nếu bạn ở xa.</p>
+      </details>
+    </div>
+
+    <div class="faq-group">
+      <p class="faq-group-title" data-field="faqGroupDN">Riêng mảng doanh nghiệp</p>
+      <details>
+        <summary data-field="faq5q">Mua phần mềm, website hoặc biển hiệu xong, sau này lỗi hoặc cần sửa thì ai hỗ trợ?</summary>
+        <p data-field="faq5a">Chúng tôi — đúng người đã làm việc với bạn từ đầu, không chuyển bạn sang bộ phận khác mà bạn phải giải thích lại từ đầu.</p>
+      </details>
+      <details>
+        <summary data-field="faq6q">Nếu ở xa thì bàn giao thế nào?</summary>
+        <p data-field="faq6a">In ấn, quảng cáo, phần mềm, website đều trao đổi và bàn giao được từ xa — chỉ việc cần đo đạc trực tiếp mới phải hẹn gặp tại chỗ.</p>
+      </details>
+    </div>
   </div>
 </section>
 
 <section id="lien-he" class="finalcta">
   <div class="wrap">
     <p class="eyebrow" data-field="ctaEyebrow">Bắt đầu hôm nay</p>
-    <h2 data-field="ctaHeading">Bạn cần một bộ biển hiệu, một website, hay một buổi luận giải lá số?</h2>
-    <p class="lead" data-field="ctaLead">Bắt đầu bằng một cuộc trò chuyện: tư vấn miễn phí, báo giá rõ ràng, không ràng buộc. Gọi hoặc nhắn — chúng tôi sẽ tư vấn đúng việc bạn cần, kể cả khi đó chưa phải lúc.</p>
+    <h2 data-field="ctaHeading">Chờ thêm không khiến việc này tự xong.</h2>
+    <p class="lead" data-field="ctaLead">Bắt đầu hôm nay, bạn có ngay một cuộc trò chuyện trực tiếp với người sẽ chịu trách nhiệm cho việc của bạn — không phải một mẫu đơn chờ được xử lý.</p>
     <div class="cta-row">
-      <a class="btn btn-primary" id="ctaCall" href="tel:0972776588" data-field="ctaBtn1">Gọi hoặc Zalo: 0972.776.588</a>
-      <a class="btn btn-secondary" id="ctaMail" href="mailto:aqtienanh@gmail.com" data-field="ctaBtn2">Gửi email hoặc nhắn Zalo cho chúng tôi</a>
+      <a class="btn btn-primary" id="ctaZalo" href="https://zalo.me/0972776588" target="_blank" rel="noopener" data-field="ctaBtn1">Nhắn Zalo đặt lịch tư vấn riêng ngay hôm nay</a>
+      <a class="btn btn-secondary" id="ctaCall" href="tel:0972776588" data-field="ctaBtn2">Chưa sẵn sàng đặt lịch? Gọi thử hỏi nhanh: 0972.776.588</a>
     </div>
+    <p class="cta-note" data-field="ctaNote">Tin nhắn đến thẳng người sẽ làm việc với bạn — không qua tổng đài, không bị chuyển máy.</p>
     <dl class="contact-grid">
       <dt data-field="contactLabelAddr">Địa chỉ</dt><dd data-field="cAddress">131 Lý Thái Tổ, TDP 12, Phường Quang Trung, Tỉnh Thanh Hoá</dd>
       <dt data-field="contactLabelPhone">Gọi / Zalo</dt><dd><ul data-field="cPhones"></ul></dd>
@@ -522,6 +724,11 @@ Hai mảng tưởng như khác nhau, nhưng cùng chung một cách làm: khảo
     <p data-field="footerNote">© 2020–2026 Công ty TNHH Một thành viên AQ Tiến Anh. Mã số doanh nghiệp 2802854585 do Phòng Đăng ký kinh doanh — Sở Kế hoạch và Đầu tư tỉnh Thanh Hoá cấp. Trang thông tin doanh nghiệp.</p>
   </div>
 </footer>
+
+<div class="mobile-cta" id="mobileCta">
+  <a class="mobile-cta-btn call" id="mcCall" href="tel:0972776588">📞 Gọi ngay</a>
+  <a class="mobile-cta-btn zalo" id="mcZalo" href="https://zalo.me/0972776588" target="_blank" rel="noopener">💬 Nhắn Zalo</a>
+</div>
 
 <button class="fab" id="fab" aria-haspopup="dialog" aria-expanded="false" aria-controls="drawer">✎ Chỉnh sửa nội dung</button>
 <div class="scrim" id="scrim"></div>
@@ -581,6 +788,30 @@ Hai mảng tưởng như khác nhau, nhưng cùng chung một cách làm: khảo
       <div class="field"><label>B · Dịch vụ 7 — mô tả</label><textarea data-bind="sol7d"></textarea></div>
       <div class="field"><label>B · Dịch vụ 8 — tên</label><input data-bind="sol8t"></div>
       <div class="field"><label>B · Dịch vụ 8 — mô tả</label><textarea data-bind="sol8d"></textarea></div>
+      <div class="field"><label>B · Dịch vụ 9 — tên</label><input data-bind="sol9t"></div>
+      <div class="field"><label>B · Dịch vụ 9 — mô tả</label><textarea data-bind="sol9d"></textarea></div>
+    </details>
+
+    <details>
+      <summary>Phần “Quy trình làm việc”</summary>
+      <div class="field"><label>Nhãn</label><input data-bind="processEyebrow"></div>
+      <div class="field"><label>Tiêu đề</label><textarea data-bind="processHeading"></textarea></div>
+      <div class="field"><label>Đoạn dẫn</label><textarea data-bind="processLead"></textarea></div>
+      <div class="field"><label>Bước 1 — tên</label><input data-bind="step1t"></div>
+      <div class="field"><label>Bước 1 — Doanh nghiệp</label><textarea data-bind="step1a"></textarea></div>
+      <div class="field"><label>Bước 1 — Phong thuỷ</label><textarea data-bind="step1b"></textarea></div>
+      <div class="field"><label>Bước 2 — tên</label><input data-bind="step2t"></div>
+      <div class="field"><label>Bước 2 — Doanh nghiệp</label><textarea data-bind="step2a"></textarea></div>
+      <div class="field"><label>Bước 2 — Phong thuỷ</label><textarea data-bind="step2b"></textarea></div>
+      <div class="field"><label>Bước 3 — tên</label><input data-bind="step3t"></div>
+      <div class="field"><label>Bước 3 — Doanh nghiệp</label><textarea data-bind="step3a"></textarea></div>
+      <div class="field"><label>Bước 3 — Phong thuỷ</label><textarea data-bind="step3b"></textarea></div>
+      <div class="field"><label>Bước 4 — tên</label><input data-bind="step4t"></div>
+      <div class="field"><label>Bước 4 — Doanh nghiệp</label><textarea data-bind="step4a"></textarea></div>
+      <div class="field"><label>Bước 4 — Phong thuỷ</label><textarea data-bind="step4b"></textarea></div>
+      <div class="field"><label>Bước 5 — tên</label><input data-bind="step5t"></div>
+      <div class="field"><label>Bước 5 — Doanh nghiệp</label><textarea data-bind="step5a"></textarea></div>
+      <div class="field"><label>Bước 5 — Phong thuỷ</label><textarea data-bind="step5b"></textarea></div>
     </details>
 
     <details>
@@ -593,6 +824,8 @@ Hai mảng tưởng như khác nhau, nhưng cùng chung một cách làm: khảo
       <div class="field"><label>Bằng chứng 3</label><textarea data-bind="proof3"></textarea></div>
       <div class="field"><label>Bằng chứng 4</label><textarea data-bind="proof4"></textarea></div>
       <div class="field"><label>Bằng chứng 5</label><textarea data-bind="proof5"></textarea></div>
+      <div class="field"><label>Bằng chứng 6 (số liệu — thay khi có thật)</label><textarea data-bind="proof6"></textarea></div>
+      <div class="field"><label>Bằng chứng 7 (giải đáp nghi ngại lớn nhất)</label><textarea data-bind="proof7"></textarea></div>
     </details>
 
     <details>
@@ -600,6 +833,27 @@ Hai mảng tưởng như khác nhau, nhưng cùng chung một cách làm: khảo
       <div class="field"><label>Nhãn</label><input data-bind="aboutEyebrow"></div>
       <div class="field"><label>Tiêu đề</label><textarea data-bind="aboutHeading"></textarea></div>
       <div class="field"><label>Nội dung (cách đoạn bằng dòng trống)</label><textarea data-bind="about" style="min-height:11rem"></textarea></div>
+    </details>
+
+    <details>
+      <summary>Câu hỏi thường gặp</summary>
+      <div class="field"><label>Nhãn</label><input data-bind="faqEyebrow"></div>
+      <div class="field"><label>Tiêu đề</label><textarea data-bind="faqHeading"></textarea></div>
+      <div class="field"><label>Tên nhóm 1</label><input data-bind="faqGroupGeneral"></div>
+      <div class="field"><label>Câu hỏi 1</label><textarea data-bind="faq1q"></textarea></div>
+      <div class="field"><label>Trả lời 1</label><textarea data-bind="faq1a"></textarea></div>
+      <div class="field"><label>Câu hỏi 2</label><textarea data-bind="faq2q"></textarea></div>
+      <div class="field"><label>Trả lời 2</label><textarea data-bind="faq2a"></textarea></div>
+      <div class="field"><label>Tên nhóm 2</label><input data-bind="faqGroupPT"></div>
+      <div class="field"><label>Câu hỏi 3</label><textarea data-bind="faq3q"></textarea></div>
+      <div class="field"><label>Trả lời 3</label><textarea data-bind="faq3a"></textarea></div>
+      <div class="field"><label>Câu hỏi 4</label><textarea data-bind="faq4q"></textarea></div>
+      <div class="field"><label>Trả lời 4</label><textarea data-bind="faq4a"></textarea></div>
+      <div class="field"><label>Tên nhóm 3</label><input data-bind="faqGroupDN"></div>
+      <div class="field"><label>Câu hỏi 5</label><textarea data-bind="faq5q"></textarea></div>
+      <div class="field"><label>Trả lời 5</label><textarea data-bind="faq5a"></textarea></div>
+      <div class="field"><label>Câu hỏi 6</label><textarea data-bind="faq6q"></textarea></div>
+      <div class="field"><label>Trả lời 6</label><textarea data-bind="faq6a"></textarea></div>
     </details>
 
     <details>
@@ -626,6 +880,7 @@ Hai mảng tưởng như khác nhau, nhưng cùng chung một cách làm: khảo
       <div class="field"><label>Nút 1 — chữ hiển thị</label><input data-bind="ctaBtn1"></div>
       <div class="field"><label>Nút 1 — số gọi (chỉ chữ số)</label><input data-bind="ctaPhone"></div>
       <div class="field"><label>Nút 2 — chữ hiển thị</label><input data-bind="ctaBtn2"></div>
+      <div class="field"><label>Lời nhắc dưới nút</label><textarea data-bind="ctaNote"></textarea></div>
       <div class="field"><label>Địa chỉ</label><textarea data-bind="cAddress"></textarea></div>
       <div class="field"><label>Số gọi / Zalo (mỗi số một dòng)</label><textarea data-bind="cPhones"></textarea></div>
       <div class="field"><label>Số Zalo (nút mở chat)</label><input data-bind="cZalo"></div>
@@ -654,45 +909,66 @@ Hai mảng tưởng như khác nhau, nhưng cùng chung một cách làm: khảo
   var LS = "aqta.content.v8";
   var DEFAULTS = {
     name:"AQ Tiến Anh",
-    heroKicker:"AQ Tiến Anh là doanh nghiệp thương mại & dịch vụ đa lĩnh vực chuyên sâu.",
-    heroTitle:"Từ tấm biển hiệu đến lá số cho con — một nơi lo trọn.",
-    heroSub:"In ấn · Quảng cáo · Phần mềm kế toán · Thiết kế website — và tư vấn phong thuỷ nhà ở, mộ phần, lập lá số Bát Tự – Tử Vi, đặt tên cho con theo phong thuỷ. Nhiều lĩnh vực, mỗi lĩnh vực làm đến nơi đến chốn.",
-    heroCtaPrimary:"Nhận tư vấn miễn phí",
-    heroCtaSecondary:"Xem tám lĩnh vực",
+    heroKicker:"In ấn · Quảng cáo · Phần mềm kế toán · Website · Phong thuỷ nhà ở · Lá số & đặt tên cho con — tất cả dưới một pháp nhân, một người chịu trách nhiệm.",
+    heroTitle:"Việc tôi nhận, tôi làm đến nơi đến chốn.",
+    heroSub:"Công ty TNHH MTV AQ Tiến Anh — mã số doanh nghiệp 2802854585, đăng ký từ 2020 tại Thanh Hoá. Mọi việc bạn thấy dưới đây, từ một tấm biển hiệu đến một lá số tử vi, đều do cùng một người trực tiếp nhận và chịu trách nhiệm — không giao qua trung gian, không ẩn danh.",
+    heroCtaPrimary:"Nhắn Zalo đặt lịch tư vấn riêng",
+    heroCtaSecondary:"Gọi thử hỏi nhanh: 0972.776.588",
     trust1:"Thành lập ngày 24/06/2020",
     trust2:"Mã số doanh nghiệp 2802854585",
     trust3:"Trụ sở tại Phường Quang Trung, Thanh Hoá",
-    trust4:"Tám nhóm dịch vụ · một đầu mối chịu trách nhiệm",
+    trust4:"Chín nhóm dịch vụ · một đầu mối chịu trách nhiệm",
 
     problemEyebrow:"Vấn đề",
     problemHeading:"Mỗi việc một nơi, mỗi nơi một kiểu — và không ai theo bạn đến cùng.",
     problemLead:"Doanh nghiệp cần in ấn, biển quảng cáo, phần mềm, website. Gia đình cần xem hướng nhà, chọn ngày, lập lá số, đặt tên cho con. Thường thì mỗi việc lại phải tìm một người khác nhau.",
-    prob1:"In ấn – quảng cáo mỗi lần đặt một nơi: mẫu mã, màu sắc và chất lượng không đồng nhất, lại hay trễ hẹn.",
-    prob2:"Phần mềm kế toán hay website mua xong bị bỏ mặc — không ai hướng dẫn, không ai sửa khi phát sinh lỗi.",
-    prob3:"Tư vấn phong thuỷ nhà ở, mộ phần mỗi người nói một kiểu; nghe xong càng phân vân, không biết tin ai.",
-    prob4:"Lập lá số, đặt tên cho con làm vội qua mạng, nhận về vài dòng, không ai giải thích cặn kẽ.",
+    prob1:"Lô tờ rơi in lần sau khác màu lần trước, hẹn 3 ngày kéo dài thành 10, không ai nhận lỗi.",
+    prob2:"Website bàn giao xong, sáu tháng sau muốn đổi một cái giá bán cũng phải nhắn tin chờ, có khi không ai trả lời.",
+    prob3:"Hỏi ba người phong thuỷ về hướng nhà, nhận về ba câu trả lời khác nhau — không biết tin ai, cũng không ai giải thích vì sao.",
+    prob4:"Gần ngày làm giấy khai sinh mới cuống tìm chỗ đặt tên, nhận vài dòng qua tin nhắn, không kịp hỏi lại cho rõ.",
 
     solEyebrow:"Lĩnh vực hoạt động",
-    solHeading:"Tám nhóm dịch vụ, hai thế mạnh — một đầu mối.",
-    solLead:"AQ Tiến Anh làm song song hai mảng: dịch vụ phục vụ công việc kinh doanh, và phong thuỷ ứng dụng phục vụ việc hệ trọng của gia đình. Cùng một cách làm: khảo kỹ, tư vấn thật, bàn giao rõ ràng.",
+    solHeading:"Chín nhóm dịch vụ, hai thế mạnh — một đầu mối.",
+    solLead:"AQ Tiến Anh làm song song hai mảng: dịch vụ phục vụ công việc kinh doanh, và phong thuỷ ứng dụng phục vụ việc hệ trọng của gia đình. Cùng một cách làm: khảo kỹ, tư vấn thật, bàn giao rõ ràng. Chúng tôi không niêm yết một bảng giá chung vì quy mô mỗi việc thực sự khác nhau — báo giá gửi trong vòng 24 giờ sau khi trao đổi, kèm điều khoản bằng văn bản, không phải một con số nói miệng.",
     solCatA:"Dịch vụ cho doanh nghiệp & cửa hàng",
     solCatB:"Phong thuỷ ứng dụng cho gia đình",
-    sol1t:"In ấn",
-    sol1d:"Tờ rơi, hồ sơ, catalogue, kẹp file, tem nhãn, decal, ảnh. In nhanh, màu chuẩn, chất lượng ổn định giữa các lần đặt.",
-    sol2t:"Quảng cáo",
-    sol2d:"Biển hiệu, hộp đèn, standee, banner, backdrop và bộ nhận diện. Thiết kế và thi công trọn gói, bảo hành rõ ràng.",
-    sol3t:"Phần mềm kế toán AQ Tiến Anh",
-    sol3d:"Lập chứng từ, ghi sổ, in ấn theo chuẩn; chạy ngoại tuyến, khoá bản quyền theo tên đơn vị. Bàn giao kèm hướng dẫn và hỗ trợ về sau.",
-    sol4t:"Thiết kế website",
-    sol4d:"Trang giới thiệu công ty, trang bán hàng, landing page. Bàn giao kèm bảng tự chỉnh sửa nội dung — bạn tự cập nhật, không phụ thuộc.",
+    sol1t:"Biển hiệu & Quảng cáo",
+    sol1d:"Biển hiệu lắp đúng ngày đã hẹn, đúng màu bản thiết kế đã duyệt — khách đi ngang phố nhận ra cửa hàng của bạn ngay từ lần nhìn đầu tiên.",
+    sol2t:"In ấn",
+    sol2d:"Lô in sau giống hệt lô in trước — không còn tình trạng logo lần này một màu, lần khác một màu.",
+    sol3t:"Thiết kế website",
+    sol3d:"Bạn tự sửa được giá, sửa được tin trên trang của mình ngay khi cần — không phải nhắn tin chờ người khác sửa hộ.",
+    sol4t:"Phần mềm kế toán",
+    sol4d:"Sổ sách lập đúng chuẩn ngay từ đầu — khi cơ quan thuế hỏi đến, bạn có sẵn chứng từ, không phải làm lại trong hoảng loạn.",
     sol5t:"Phong thuỷ nhà ở",
-    sol5d:"Xem hướng, bố cục công năng, ngày giờ động thổ – nhập trạch. Khảo sát thực địa hoặc theo bản vẽ, tư vấn phương án khả thi.",
-    sol6t:"Phong thuỷ mộ phần",
-    sol6d:"Chọn đất, chọn hướng, chọn ngày giờ an táng – cải táng. Tư vấn trên tinh thần trọng lễ nghi và tâm nguyện gia đình.",
-    sol7t:"Lá số Bát Tự & Tử Vi",
-    sol7d:"Luận giải vận mệnh, điểm mạnh – điểm cần lưu ý, các năm quan trọng. Giải thích cặn kẽ, giao bản luận viết tay hoặc đánh máy.",
-    sol8t:"Đặt tên cho con theo phong thuỷ",
-    sol8d:"Cân bằng Bát Tự của bé, hài hoà với mệnh cha mẹ, đẹp về ý nghĩa và dễ gọi. Đề xuất nhiều phương án kèm phân tích.",
+    sol5d:"Bạn động thổ, nhập trạch với một phương án đã được khảo sát và giải thích rõ ràng — không còn phân vân nhà mình có \"phạm\" gì không.",
+    sol6t:"Lá số Bát Tự & Tử Vi",
+    sol6d:"Bạn cầm trong tay một bản luận giải viết rõ ràng để đọc lại bất cứ lúc nào cần quyết định — không phải nhớ lại vài câu nói vội qua điện thoại.",
+    sol7t:"Đặt tên cho con",
+    sol7d:"Bạn chọn được một cái tên vừa hợp mệnh con, vừa dễ gọi dễ viết — không phải phân vân giữa những cái tên đẹp nghĩa nhưng khó hợp.",
+    sol8t:"Phong thuỷ mộ phần",
+    sol8d:"Gia đình an tâm chọn được ngày giờ, hướng đặt phù hợp cho việc an táng — cải táng, đúng lễ nghi, không phải tự dò hỏi nhiều nơi trong lúc bối rối.",
+    sol9t:"Lá số Kỳ Môn Độn Giáp",
+    sol9d:"Bạn biết đúng thời điểm nên hành động cho một việc quan trọng — khai trương, ký kết, khởi sự — dựa trên lá số lập riêng cho đúng tình huống đó, không phải chọn ngày theo lịch chung chung.",
+
+    processEyebrow:"Cách chúng tôi làm việc",
+    processHeading:"Năm bước, áp dụng cho mọi việc bạn giao",
+    processLead:"Một quy trình chung cho cả hai mảng — chỉ khác nhau ở cách thực hiện từng bước.",
+    step1t:"Tiếp nhận & khảo sát",
+    step1a:"Khảo sát trực tiếp mặt bằng/hiện trạng hoặc yêu cầu kỹ thuật, đo đạc và ghi nhận cụ thể.",
+    step1b:"Khảo sát nhà đất thực tế hoặc theo bản vẽ, thu thập ngày giờ sinh của những người liên quan.",
+    step2t:"Đề xuất phương án",
+    step2a:"Gửi bản thiết kế/báo giá cụ thể trong vòng 24 giờ.",
+    step2b:"Trình bày phân tích và các phương án khả thi, giải thích rõ căn cứ đưa ra từng phương án.",
+    step3t:"Xác nhận & thực hiện",
+    step3a:"Khách duyệt mẫu, ký báo giá, tiến hành thi công/lập trình theo đúng bản đã duyệt.",
+    step3b:"Gia đình chọn phương án, chúng tôi lập lá số hoặc hoàn thiện phần luận giải chi tiết.",
+    step4t:"Bàn giao bằng văn bản",
+    step4a:"Nghiệm thu cùng khách, bàn giao kèm hướng dẫn sử dụng và phiếu bảo hành ghi rõ thời hạn.",
+    step4b:"Giao bản luận giải viết rõ ràng, giải thích trực tiếp từng điểm.",
+    step5t:"Đồng hành sau đó",
+    step5a:"Hỗ trợ sửa lỗi, điều chỉnh trong thời hạn bảo hành, không phát sinh phí cho lỗi thuộc về chúng tôi.",
+    step5b:"Sẵn sàng giải đáp thêm nếu gia đình có câu hỏi phát sinh sau khi đã triển khai phương án.",
 
     proofEyebrow:"Vì sao chọn AQ Tiến Anh",
     proofHeading:"Một pháp nhân rõ ràng đứng sau mỗi bản in và mỗi buổi luận giải.",
@@ -702,6 +978,26 @@ Hai mảng tưởng như khác nhau, nhưng cùng chung một cách làm: khảo
     proof3:"Doanh nghiệp có hợp đồng, báo giá và chứng từ đầy đủ; phần tư vấn phong thuỷ giao kèm bản luận giải bằng văn bản để gia đình lưu lại.",
     proof4:"Gắn bó với địa phương: khách hàng có thể đến làm việc trực tiếp tại trụ sở 131 Lý Thái Tổ, TDP 12, Phường Quang Trung, Tỉnh Thanh Hoá.",
     proof5:"Tư vấn phong thuỷ trên tinh thần tôn trọng tín ngưỡng và quan sát thực tế — nói rõ điều làm được và không làm được, không hù doạ, không ép mua vật phẩm.",
+    proof6:"Chúng tôi chưa đưa lên đây một con số kết quả cụ thể vì chưa có dữ liệu đủ minh bạch để công bố — sẽ cập nhật khi có, không tô vẽ trước.",
+    proof7:"Hai lĩnh vực khác xa nhau, nhưng chỉ một người ký tên chịu trách nhiệm cho cả hai — việc nào chúng tôi không đủ sức làm đến nơi đến chốn, chúng tôi từ chối ngay từ đầu, không nhận đại cho có.",
+
+    faqEyebrow:"Câu hỏi thường gặp",
+    faqHeading:"Những điều khách thường hỏi trước khi quyết định",
+    faqGroupGeneral:"Chung cho cả công ty",
+    faq1q:"Công ty làm nhiều lĩnh vực khác nhau, chuyên môn có thật sự sâu hay chỉ biết sơ sơ?",
+    faq1a:"Đúng là chúng tôi làm nhiều lĩnh vực thật — nhưng mỗi lĩnh vực chỉ được nhận theo đúng năng lực thực tế, không nhận đại cho đủ danh mục; việc nào vượt quá khả năng, chúng tôi nói thẳng ngay từ đầu, kể cả khi điều đó có nghĩa là mất một khách hàng.",
+    faq2q:"Giá ở đây có cao hơn nơi khác không, và vì sao?",
+    faq2a:"Có thể cao hơn một xưởng in không tên hoặc một buổi xem qua mạng — vì mỗi việc đều có khảo sát thực tế, cam kết bằng văn bản và một người trực tiếp chịu trách nhiệm nếu có sai sót, không chỉ là một sản phẩm hay một câu trả lời miệng.",
+    faqGroupPT:"Riêng mảng phong thuỷ",
+    faq3q:"Tư vấn phong thuỷ có phải chỉ để bán vật phẩm phong thuỷ không?",
+    faq3a:"Không. Chúng tôi không bán vật phẩm phong thuỷ kèm theo buổi tư vấn; phần bàn giao duy nhất là bản luận giải bằng văn bản, còn lại là quyết định của gia đình bạn.",
+    faq4q:"Nếu ở xa thì khảo sát phong thuỷ thế nào?",
+    faq4a:"Khảo sát phong thuỷ có thể thực hiện qua bản vẽ và hình ảnh nếu bạn ở xa.",
+    faqGroupDN:"Riêng mảng doanh nghiệp",
+    faq5q:"Mua phần mềm, website hoặc biển hiệu xong, sau này lỗi hoặc cần sửa thì ai hỗ trợ?",
+    faq5a:"Chúng tôi — đúng người đã làm việc với bạn từ đầu, không chuyển bạn sang bộ phận khác mà bạn phải giải thích lại từ đầu.",
+    faq6q:"Nếu ở xa thì bàn giao thế nào?",
+    faq6a:"In ấn, quảng cáo, phần mềm, website đều trao đổi và bàn giao được từ xa — chỉ việc cần đo đạc trực tiếp mới phải hẹn gặp tại chỗ.",
 
     aboutEyebrow:"Về công ty",
     aboutHeading:"Một doanh nghiệp nhỏ, làm đúng phần việc của mình.",
@@ -718,14 +1014,15 @@ Hai mảng tưởng như khác nhau, nhưng cùng chung một cách làm: khảo
     hq:"131 Lý Thái Tổ, TDP 12, Phường Quang Trung, Tỉnh Thanh Hoá",
     rep:"ThS. Nguyễn Vinh Quang — Giám đốc",
     bank:"16171888888 — Ngân hàng TMCP Á Châu (ACB), Chi nhánh Bỉm Sơn",
-    legalNote:"Thông tin nêu trên trích từ Giấy chứng nhận đăng ký doanh nghiệp. Mọi hợp đồng, hoá đơn và cam kết bảo hành đều được lập bằng văn bản theo pháp nhân này.",
+    legalNote:"Thông tin nêu trên trích từ Giấy chứng nhận đăng ký doanh nghiệp. Mọi hợp đồng, hoá đơn và cam kết bảo hành đều được lập bằng văn bản theo pháp nhân này. Bạn có thể tự tra cứu mã số 2802854585 tại Cổng thông tin quốc gia về đăng ký doanh nghiệp (dangkykinhdoanh.gov.vn) để đối chiếu đúng tên công ty và người đại diện, trước khi quyết định làm việc với chúng tôi.",
 
     ctaEyebrow:"Bắt đầu hôm nay",
-    ctaHeading:"Bạn cần một bộ biển hiệu, một website, hay một buổi luận giải lá số?",
-    ctaLead:"Bắt đầu bằng một cuộc trò chuyện: tư vấn miễn phí, báo giá rõ ràng, không ràng buộc. Gọi hoặc nhắn — chúng tôi sẽ tư vấn đúng việc bạn cần, kể cả khi đó chưa phải lúc.",
-    ctaBtn1:"Gọi hoặc Zalo: 0972.776.588",
+    ctaHeading:"Chờ thêm không khiến việc này tự xong.",
+    ctaLead:"Bắt đầu hôm nay, bạn có ngay một cuộc trò chuyện trực tiếp với người sẽ chịu trách nhiệm cho việc của bạn — không phải một mẫu đơn chờ được xử lý.",
+    ctaBtn1:"Nhắn Zalo đặt lịch tư vấn riêng ngay hôm nay",
     ctaPhone:"0972776588",
-    ctaBtn2:"Gửi email hoặc nhắn Zalo cho chúng tôi",
+    ctaBtn2:"Chưa sẵn sàng đặt lịch? Gọi thử hỏi nhanh: 0972.776.588",
+    ctaNote:"Tin nhắn đến thẳng người sẽ làm việc với bạn — không qua tổng đài, không bị chuyển máy.",
 
     contactLabelAddr:"Địa chỉ",
     contactLabelPhone:"Gọi / Zalo",
@@ -794,13 +1091,9 @@ Hai mảng tưởng như khác nhau, nhưng cùng chung một cách làm: khảo
         n.textContent = v;
       }
     }
-    if(k === "ctaBtn1" || k === "ctaPhone"){
+    if(k === "ctaBtn2" || k === "ctaPhone"){
       var call = document.getElementById("ctaCall");
       if(call) call.href = telHref(content.ctaPhone || "");
-    }
-    if(k === "cEmail"){
-      var mail = document.getElementById("ctaMail");
-      if(mail) mail.href = "mailto:" + (content.cEmail || "");
     }
     if(k === "name"){ document.title = content.name || "AQ Tiến Anh"; }
   }
@@ -824,9 +1117,141 @@ Hai mảng tưởng như khác nhau, nhưng cùng chung một cách làm: khảo
           content[k] = inp.value;
           renderField(k);
           save();
+          wireMobileCta();
+          buildStructuredData();
         });
       })(inputs[i]);
     }
+  }
+
+  // Dữ liệu có cấu trúc (JSON-LD) — giúp Google hiểu đúng doanh nghiệp và
+  // có thể hiển thị phần Hỏi đáp ngay trên trang kết quả tìm kiếm.
+  function buildStructuredData(){
+    try{
+      var digits = String(content.ctaPhone || "").replace(/[^0-9]/g,"");
+      var phoneIntl = digits ? ("+84" + digits.replace(/^0/,"")) : undefined;
+      var biz = {
+        "@context":"https://schema.org",
+        "@type":"LocalBusiness",
+        "name": content.fullname || content.name,
+        "alternateName": content.tradename,
+        "url": "https://aqtienanh-bot.github.io/gioi-thieu-aqtienanh/",
+        "telephone": phoneIntl,
+        "email": content.cEmail,
+        "address": {
+          "@type":"PostalAddress",
+          "streetAddress": content.hq,
+          "addressRegion": "Thanh Hoá",
+          "addressCountry": "VN"
+        },
+        "founder": { "@type":"Person", "name": "Nguyễn Vinh Quang" },
+        "foundingDate": "2020-06-24",
+        "taxID": content.msdn,
+        "description": content.heroSub
+      };
+      var pairs = [["faq1q","faq1a"],["faq2q","faq2a"],["faq3q","faq3a"],["faq4q","faq4a"],["faq5q","faq5a"],["faq6q","faq6a"]];
+      var faqEntities = [];
+      for(var i=0;i<pairs.length;i++){
+        var q = content[pairs[i][0]], a = content[pairs[i][1]];
+        if(q && a){
+          faqEntities.push({ "@type":"Question", "name": q, "acceptedAnswer": { "@type":"Answer", "text": a } });
+        }
+      }
+      var faqLd = { "@context":"https://schema.org", "@type":"FAQPage", "mainEntity": faqEntities };
+      var bizEl = document.getElementById("ldBiz");
+      var faqEl = document.getElementById("ldFaq");
+      if(bizEl) bizEl.textContent = JSON.stringify(biz);
+      if(faqEl) faqEl.textContent = JSON.stringify(faqLd);
+    }catch(e){}
+  }
+
+  // Nút đổi giao diện sáng/tối thủ công (độc lập với cài đặt hệ điều hành)
+  function currentTheme(){
+    var t = document.documentElement.getAttribute("data-theme");
+    if(t === "light" || t === "dark") return t;
+    return (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+  }
+  function updateThemeIcon(){
+    var btn = document.getElementById("themeToggle");
+    if(!btn) return;
+    var dark = currentTheme() === "dark";
+    btn.textContent = dark ? "☀" : "🌙";
+    btn.setAttribute("aria-label", dark ? "Chuyển sang giao diện sáng" : "Chuyển sang giao diện tối");
+  }
+  function wireThemeToggle(){
+    var btn = document.getElementById("themeToggle");
+    if(!btn) return;
+    updateThemeIcon();
+    btn.addEventListener("click", function(){
+      var next = currentTheme() === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      try{ localStorage.setItem("aqta.theme", next); }catch(e){}
+      updateThemeIcon();
+    });
+  }
+
+  // Thanh liên hệ nhanh cố định trên di động — luôn khớp với số điện thoại/Zalo hiện tại
+  function wireMobileCta(){
+    var callLink = document.getElementById("mcCall");
+    var zaloLink = document.getElementById("mcZalo");
+    if(callLink) callLink.href = telHref(content.ctaPhone || "0972776588");
+    if(zaloLink){
+      var digits = String(content.cZalo || content.ctaPhone || "").replace(/[^0-9]/g,"");
+      zaloLink.href = digits ? ("https://zalo.me/" + digits) : "https://zalo.me/0972776588";
+    }
+  }
+
+  // Nút "Sao chép" cho mã số doanh nghiệp / số tài khoản ngân hàng
+  function wireCopyButtons(){
+    var btns = document.querySelectorAll(".copy-mini");
+    for(var i=0;i<btns.length;i++){
+      (function(btn){
+        if(!btn.dataset.label) btn.dataset.label = btn.textContent;
+        btn.addEventListener("click", function(){
+          var key = btn.getAttribute("data-copy");
+          var val = content[key] != null ? String(content[key]) : "";
+          function done(){
+            btn.textContent = "Đã chép ✓";
+            setTimeout(function(){ btn.textContent = btn.dataset.label; }, 1600);
+          }
+          if(navigator.clipboard && navigator.clipboard.writeText){
+            navigator.clipboard.writeText(val).then(done, done);
+          } else {
+            try{
+              var ta = document.createElement("textarea");
+              ta.value = val; ta.style.position = "fixed"; ta.style.opacity = "0";
+              document.body.appendChild(ta); ta.focus(); ta.select();
+              document.execCommand("copy"); document.body.removeChild(ta);
+            }catch(e){}
+            done();
+          }
+        });
+      })(btns[i]);
+    }
+  }
+
+  // Bôi đậm mục lục theo phần đang xem khi cuộn trang
+  function wireActiveNav(){
+    var navLinks = document.querySelectorAll('#mainNav a[href^="#"]');
+    if(!navLinks.length || !("IntersectionObserver" in window)) return;
+    var map = {};
+    for(var i=0;i<navLinks.length;i++){
+      var id = navLinks[i].getAttribute("href").slice(1);
+      if(document.getElementById(id)) map[id] = navLinks[i];
+    }
+    function clearActive(){
+      for(var j=0;j<navLinks.length;j++) navLinks[j].classList.remove("active");
+    }
+    var io = new IntersectionObserver(function(entries){
+      for(var k=0;k<entries.length;k++){
+        var entry = entries[k];
+        if(entry.isIntersecting && map[entry.target.id]){
+          clearActive();
+          map[entry.target.id].classList.add("active");
+        }
+      }
+    }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
+    for(var id2 in map){ io.observe(document.getElementById(id2)); }
   }
 
   // Bảng chỉnh sửa — chỉ chạy ở chế độ biên tập (máy chính / bản xem trước)
@@ -891,6 +1316,31 @@ Hai mảng tưởng như khác nhau, nhưng cùng chung một cách làm: khảo
     document.getElementById("printBtn").addEventListener("click", function(){ window.print(); });
   }
 
+  // Menu di động — bấm để mở/đóng danh sách mục lục trên màn hình nhỏ
+  function wireMobileNav(){
+    var topbar = document.querySelector(".topbar");
+    var toggle = document.getElementById("menuToggle");
+    if(!topbar || !toggle) return;
+    toggle.addEventListener("click", function(){
+      var open = topbar.classList.toggle("nav-open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    var links = topbar.querySelectorAll("nav a");
+    for(var i=0;i<links.length;i++){
+      links[i].addEventListener("click", function(){
+        topbar.classList.remove("nav-open");
+        toggle.setAttribute("aria-expanded","false");
+      });
+    }
+    document.addEventListener("keydown", function(e){
+      if(e.key === "Escape" && topbar.classList.contains("nav-open")){
+        topbar.classList.remove("nav-open");
+        toggle.setAttribute("aria-expanded","false");
+      }
+    });
+  }
+  wireMobileNav();
+
   // Chế độ biên tập: chỉ bật khi mở file trực tiếp trên máy, localhost,
   // bản xem trước của Claude, hoặc thêm #edit vào URL. Bản web chia sẻ -> tắt hẳn.
   var EDIT_MODE = (function(){
@@ -907,6 +1357,11 @@ Hai mảng tưởng như khác nhau, nhưng cùng chung một cách làm: khảo
 
   load();
   renderAll();
+  buildStructuredData();
+  wireThemeToggle();
+  wireMobileCta();
+  wireCopyButtons();
+  wireActiveNav();
 
   if(EDIT_MODE){
     document.documentElement.classList.add("edit");
